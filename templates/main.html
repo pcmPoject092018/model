@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!--<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="static/bootstrap/css/style.css">
+	<link rel="stylesheet" type="text/css" href="static/font-awesome/css/font-awesome.css">
+	<meta charset="utf-8">
+</head>
+
+<body>
+
+	<div class="container-fluid">
+
+		<div class="row">		
+			<div class="col-md-12">
+				<img src="static/img/logo.svg" width="700px;" class="img-responsive logo">
+			</div>						
+		</div>				
+	</div>
+
+
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="jumbotron" style="background: #727175; color: #fff;">
+		<div class="container-fluid">
+			<h1>Pronostico de tasa de cambio a 7 dias del precio de cierre America Movil.</h1>
+		</div>
+	</div>
+
+	<!--"http://10.0.30.212:5000/last_batch"-->  
+	<!--"http://10.0.30.212:5000/line_chart" -->
+	<hr>
+
+	<div class="container-fluid">
+		<div class="row">		
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-4">
+				<h2>Pronostico actual</h2>
+				<form class="form-signin" action = "http://127.0.0.1:5000/last_batch" method = "POST">
+					<div class="form-group">
+						<label for="last" class="sr-only">Pronostico actual</label>
+						<select class="form-control" name="last" id="last" required>
+							<option value="Final" label="17-09-2018" selected>17-09-2018</option>
+						</select> 
+					</div>
+					<button type="submit" class="btn btn-default btn-lg"><i class="fa fa-line-chart" aria-hidden="true"></i> Consultar</button>
+				</form>
+			</div>
+			<div class="col-md-4">
+			</div>
+		</div>
+
+		<br><br>
+
+		<div class="row">		
+			<div class="col-md-4">
+			</div>
+			<div class="col-lg-4">
+				<h2>Seleccionar pronosticos anteriores</h2>	
+				<form class="form-signin" action = "http://127.0.0.1:5000/line_chart" method = "POST">	
+					<div class="form-group">
+						<label for="ejemplo" class="sr-only">Pronosticos anteriores</label>
+						<select class="form-control" name="ejemplo" id="ejemplo" required>
+							<option value="6" label="10-09-2018" selected>10-09-2018</option>
+							<option value="5" label="03-09-2018">03-09-2018</option>
+							<option value="4" label="27-08-2018">27-08-2018</option>
+							<option value="3" label="20-08-2018">20-08-2018</option>
+							<option value="2" label="13-08-2018">13-08-2018</option>
+							<option value="1" label="06-08-2018">06-08-2018</option>
+						</select> 
+					</div>					
+					<button type="submit" class="btn btn-default btn-lg"><i class="fa fa-line-chart" aria-hidden="true"></i> Consultar</button>
+				</form>
+			</div>
+			<div class="col-md-4">
+			</div>
+		</div>	
+
+		<hr>
+		<div class="jumbotron">
+	<div class="container-fluid">
+        <div class="list-group-item active">
+	    <p style="font-size:25px;" >La tasa de cambio se toma con respecto a 8 dias atras del precio correspondiente. La formula usada es (precio actual - precio de hace 8 dias)/precio de hace 8 dias, multiplicado por 100.</p>
+	    <p style="font-size:25px;">El pronostico es un promedio de las mejores aproximaciones alcanzadas con el modelo (*) y viene acompañado de una interpretacion para el usuario.</p>
+	    </div>
+	  </div>	
+    </div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="alert alert-warning" role="alert">
+					<p style="font-size:25px;">(*) El modelo consiste en una red neuronal recurrente el cual busca aproximarse a los valores reales mediante una curva. La mejor aproximacion de un modelo puede estar en funcion de la capacidad y tiempo de ejecucion con el que se cuente. </p>
+				</div>
+			</div>
+		</div>
+
+
+		<hr>
+
+		<!-- Site footer -->
+		<footer class="footer">
+			<p>&copy; 2018 PCM.</p>
+		</footer>
+	</div>
+
+	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+
+</body>	
+</html>

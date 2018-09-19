@@ -1,0 +1,10 @@
+.logo{
+	margin: 0 auto;
+	display: block;
+}
+.jumbotron h1, .jumbotron .h1{	
+	font-size: 43px !important;
+}
+.jumbotron{
+	text-align: center;
+}
