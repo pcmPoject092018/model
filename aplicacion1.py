@@ -1,18 +1,12 @@
 from flask import Flask
 from flask import render_template,request
 from datetime import time
-  
- 
-import tensorflow as tf  
+   
 import pandas as pd  
 import numpy as np     
  
 import matplotlib.pyplot as plt    
-import tensorflow.contrib.rnn as rnn
-import tensorflow.contrib.layers as tflayers
 
-from sklearn.preprocessing import MinMaxScaler
-  
 import math     
 import datetime  
  
