@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!--<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">-->
 	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 	<link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="static/bootstrap/css/style.css">
@@ -28,9 +27,6 @@
 			<h1>Pronostico de tasa de cambio a 7 dias del precio de cierre America Movil.</h1>
 		</div>
 	</div>
-
-	<!--"http://10.0.30.212:5000/last_batch"-->  
-	<!--"http://10.0.30.212:5000/line_chart" -->
 	<hr>
 
 	<div class="container-fluid">
@@ -39,6 +35,7 @@
 			</div>
 			<div class="col-md-4">
 				<h2>Pronostico actual</h2>
+				<!--<form class="form-signin" action = "http://127.0.0.1:5000/last_batch" method = "POST">-->
 				<form class="form-signin" action = "http://127.0.0.1:5000/last_batch" method = "POST">
 					<div class="form-group">
 						<label for="last" class="sr-only">Pronostico actual</label>
@@ -60,7 +57,8 @@
 			</div>
 			<div class="col-lg-4">
 				<h2>Seleccionar pronosticos anteriores</h2>	
-				<form class="form-signin" action = "http://127.0.0.1:5000/line_chart" method = "POST">	
+				<!--<form class="form-signin" action = "http://127.0.0.1:5000/line_chart" method = "POST">-->
+                <form class="form-signin" action = "/line_chart" method = "POST">				
 					<div class="form-group">
 						<label for="ejemplo" class="sr-only">Pronosticos anteriores</label>
 						<select class="form-control" name="ejemplo" id="ejemplo" required>

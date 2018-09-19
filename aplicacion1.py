@@ -26,7 +26,7 @@ def main():
 @app.route("/line_chart",methods=['POST','GET']) 
 def line_chart():  
     number = request.form.get('ejemplo',type=int)
-    fullPath='C:/Users/USUARIO/Documents/stocksModel/predicciones/'
+    fullPath='model/predicciones/'
     remainingPath='prediccion'+str(number)+'.csv' 
     df=pd.read_csv(fullPath+remainingPath,header=0) 
     prediccion=df['prediccion']    
@@ -118,7 +118,7 @@ def last_batch():
     interpretacion[5]="Si el precio de cierre del 12-09-2018 fue de 16.05, el precio de cierre del 21-09-2018 podria ser mayor a 16.05 con una tasa de cambio posiblemente cercana a 2.41."
     interpretacion[6]="Si el precio de cierre del 13-09-2018 fue de 16.06, el precio de cierre del 24-09-2018 podria ser mayor a 16.06 con una tasa de cambio posiblemente cercana a 4.17."
     interpretacion[7]="Si el precio de cierre del 14-09-2018 fue de 15.64, el precio de cierre del 25-09-2018 podria ser mayor a 15.64 con una tasa de cambio posiblemente cercana a 3.65."
-    fullPath='C:/Users/USUARIO/Documents/stocksModel/predicciones/'
+    fullPath='model/predicciones/'
     remainingPath='prediccionFinal.csv'
     df=pd.read_csv(fullPath+remainingPath,header=0)
     prediccion=df['prediccion'] 
@@ -135,6 +135,6 @@ def last_batch():
 
    
 if __name__ == "__main__":
-    app.run(debug=True,port=5000)
-#host='0.0.0.0'	
+    #app.run(debug=True,port=5000)
+	app.run(debug=True)
 print('You can check the website now!')
