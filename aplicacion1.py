@@ -75,14 +75,14 @@ def line_chart():
     interpretacion5[6]="Si el precio de cierre del 30-08-2018 fue de 16.22, el precio de cierre del 10-09-2018 podria ser menor a 16.22 con una tasa de cambio posiblemente cecana a -3.84."  
     interpretacion5[7]="Si el precio de cierre del 31-08-2018 fue de 16.05, el precio de cierre del 11-09-2018 podria ser menor a 16.05 con una tasa de cambio posiblemente cecana a -3.91."  
     interpretacion6={}
-    interpretacion6[0]="El modelo sugiere que la tasa de cambio podria ser positiva a partir del 13-09-2018 aproximadamente. Eso implicaria que:"
-    interpretacion6[1]=""
-    interpretacion6[2]="" 
-    interpretacion6[3]=""  
-    interpretacion6[4]="Si el precio de cierre del 04-09-2018 fue de 15.79, el precio de cierre del 13-09-2018 podria ser mayor a 15.79 con una tasa de cambio posiblemente cercana a 1.74."
-    interpretacion6[5]="Si el precio de cierre del 05-09-2018 fue de 15.30, el precio de cierre del 14-09-2018 podria ser mayor a 15.30 con una tasa de cambio posiblemente cercana a 1.96."
-    interpretacion6[6]="Si el precio de cierre del 06-09-2018 fue de 15.51, el precio de cierre del 17-09-2018 podria ser mayor a 15.51 con una tasa de cambio posiblemente cercana a 0.60."
-    interpretacion6[7]="Si el precio de cierre del 07-09-2018 fue de 15.71, el precio de cierre del 18-09-2018 podria ser mayor a 15.71 con una tasa de cambio posiblemente cercana a 0.75."
+    interpretacion6[0]="El modelo sugiere que la tasa de cambio podria ser positiva a partir del 10-09-2018 aproximadamente. Eso implicaria que:"
+    interpretacion6[1]="Si el precio de cierre del 30-08-2018 fue de 16.22, el precio de cierre del 10-09-2018 podria ser mayor a 16.22 con una tasa de cambio posiblemente cercana a 0.78."
+    interpretacion6[2]="Si el precio de cierre del 31-08-2018 fue de 16.05, el precio de cierre del 11-09-2018 podria ser mayor a 16.05 con una tasa de cambio posiblemente cercana a 2.89." 
+    interpretacion6[3]="Si el precio de cierre del 03-09-2018 fue de 16.10, el precio de cierre del 12-09-2018 podria ser mayor a 16.10 con una tasa de cambio posiblemente cercana a 2.89."  
+    interpretacion6[4]="Si el precio de cierre del 04-09-2018 fue de 15.79, el precio de cierre del 13-09-2018 podria ser mayor a 15.79 con una tasa de cambio posiblemente cercana a 3.66."
+    interpretacion6[5]="Si el precio de cierre del 05-09-2018 fue de 15.30, el precio de cierre del 14-09-2018 podria ser mayor a 15.30 con una tasa de cambio posiblemente cercana a 2.04."
+    interpretacion6[6]="Si el precio de cierre del 06-09-2018 fue de 15.51, el precio de cierre del 17-09-2018 podria ser mayor a 15.51 con una tasa de cambio posiblemente cercana a 1.77."
+    interpretacion6[7]="Si el precio de cierre del 07-09-2018 fue de 15.71, el precio de cierre del 18-09-2018 podria ser mayor a 15.71 con una tasa de cambio posiblemente cercana a 3.73."
     interpretaciones=["dummy",interpretacion1,interpretacion2,interpretacion3,interpretacion4,interpretacion5,interpretacion6]
     interpretacion=interpretaciones[number]
     dataframe1=pd.DataFrame({'fecha':["08-08-2018","09-08-2018","10-08-2018","13-08-2018","14-08-2018"],'precio de cierre':["16.27","15.94","15.66","15.78","15.9"],'tasa de cambio':["2.00","-0.18","-0.88","0.50","1.14"],'acierto del modelo':["no","si","si","no","no"]})
@@ -95,7 +95,7 @@ def line_chart():
     dataframe4=dataframe4[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
     dataframe5=pd.DataFrame({'fecha':["05-09-2018","06-09-2018","07-09-2018","10-09-2018","11-09-2018"],'precio de cierre':["15.30","15.51","15.71","15.71","15.60"],'tasa de cambio':["-6.24","-5.25","-5.07","-3.14","-2.80"],'acierto del modelo':["si","si","si","si","si"]})
     dataframe5=dataframe5[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
-    dataframe6=pd.DataFrame({'fecha':["13-09-2018","14-09-2018","17-09-2018","18-09-2018"],'precio de cierre':["16.06","15.64","15.55",""],'tasa de cambio':["1.70","2.22","0.25",""],'acierto del modelo':["si","si","si",""]})
+    dataframe6=pd.DataFrame({'fecha':["10-09-2018","11-09-2018","12-09-2018","13-09-2018","14-09-2018","17-09-2018","18-09-2018"],'precio de cierre':["15.71","15.60","16.05","16.06","15.67","15.55","15.61"],'tasa de cambio':["-3.14","-2.80","-0.31","1.70","2.41","0.25","-0.63"],'acierto del modelo':["no","no","no","si","si","si","no"]})
     dataframe6=dataframe6[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
     dataframes=["dummy",dataframe1,dataframe2,dataframe3,dataframe4,dataframe5,dataframe6]
     x=dataframes[number]
@@ -104,14 +104,14 @@ def line_chart():
 @app.route("/last_batch",methods=['POST','GET'])	
 def last_batch():   
     interpretacion={} 
-    interpretacion[0]="El modelo sugiere que la tasa de cambio podria ser positiva a partir del 20-09-2018 aproximadamente. Eso implicaria que:"
-    interpretacion[1]="" 
-    interpretacion[2]="" 
-    interpretacion[3]=""
-    interpretacion[4]="Si el precio de cierre del 11-09-2018 fue de 15.60, el precio de cierre del 20-09-2018 podria ser mayor a 15.60 con una tasa de cambio posiblemente cercana a 0.32."
-    interpretacion[5]="Si el precio de cierre del 12-09-2018 fue de 16.05, el precio de cierre del 21-09-2018 podria ser mayor a 16.05 con una tasa de cambio posiblemente cercana a 2.41."
-    interpretacion[6]="Si el precio de cierre del 13-09-2018 fue de 16.06, el precio de cierre del 24-09-2018 podria ser mayor a 16.06 con una tasa de cambio posiblemente cercana a 4.17."
-    interpretacion[7]="Si el precio de cierre del 14-09-2018 fue de 15.64, el precio de cierre del 25-09-2018 podria ser mayor a 15.64 con una tasa de cambio posiblemente cercana a 3.65."
+    interpretacion[0]="El modelo sugiere que la tasa de cambio podria ser positiva a partir del 17-09-2018 aproximadamente. Eso implicaria que:"
+    interpretacion[1]="Si el precio de cierre del 06-09-2018 fue de 15.51, el precio de cierre del 17-09-2018 podria ser mayor a 15.51 con una tasa de cambio posiblemente cercana a 0.66." 
+    interpretacion[2]="Si el precio de cierre del 07-09-2018 fue de 15.71, el precio de cierre del 18-09-2018 podria ser mayor a 15.71 con una tasa de cambio posiblemente cercana a 0.72." 
+    interpretacion[3]="Si el precio de cierre del 10-09-2018 fue de 15.71, el precio de cierre del 19-09-2018 podria ser mayor a 15.71 con una tasa de cambio posiblemente cercana a 1.24."
+    interpretacion[4]="Si el precio de cierre del 11-09-2018 fue de 15.60, el precio de cierre del 20-09-2018 podria ser mayor a 15.60 con una tasa de cambio posiblemente cercana a 0.63."
+    interpretacion[5]="Si el precio de cierre del 12-09-2018 fue de 16.05, el precio de cierre del 21-09-2018 podria ser mayor a 16.05 con una tasa de cambio posiblemente cercana a 1.90."
+    interpretacion[6]="Si el precio de cierre del 13-09-2018 fue de 16.06, el precio de cierre del 24-09-2018 podria ser mayor a 16.06 con una tasa de cambio posiblemente cercana a 2.03."
+    interpretacion[7]="Si el precio de cierre del 14-09-2018 fue de 15.67, el precio de cierre del 25-09-2018 podria ser mayor a 15.67 con una tasa de cambio posiblemente cercana a 1.90."
     fullPath='model/predicciones/'
     remainingPath='prediccionFinal.csv'
     df=pd.read_csv(fullPath+remainingPath,header=0)
@@ -122,7 +122,7 @@ def last_batch():
     precios=df['precios']
     fechaInicio=fecha[0]
     fechaFin=fecha[6]
-    x=pd.DataFrame({'fecha':["20-09-2018","21-09-2018","24-09-2018","25-09-2018"],'precio de cierre':["","","",""],'tasa de cambio':["","","",""],'acierto del modelo':["","","",""]})
+    x=pd.DataFrame({'fecha':["17-09-2018","18-09-2018","19-09-2018","20-09-2018","21-09-2018","24-09-2018","25-09-2018"],'precio de cierre':["15.55","15.61","15.60","","","",""],'tasa de cambio':["0.25","-0.63","-0.70","","","",""],'acierto del modelo':["si","no","no","","","",""]})
     x=x[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
     return render_template('last_batch.html', values_prediccion=prediccion,values_real=real,values_precios=precios, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
    
