@@ -99,7 +99,7 @@ def line_chart():
     dataframe6=dataframe6[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
     dataframes=["dummy",dataframe1,dataframe2,dataframe3,dataframe4,dataframe5,dataframe6]
     x=dataframes[number]
-	x=x.iloc[3:,]
+    x=x.iloc[3:,]
     return render_template('line_chart.html', values_prediccion=prediccion,values_real=real,values_precios=precios, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
  
 @app.route("/last_batch",methods=['POST','GET'])	
@@ -125,7 +125,7 @@ def last_batch():
     fechaFin=fecha[6]
     x=pd.DataFrame({'fecha':["17-09-2018","18-09-2018","19-09-2018","20-09-2018","21-09-2018","24-09-2018","25-09-2018"],'precio de cierre':["15.55","15.61","15.60","","","",""],'tasa de cambio':["0.25","-0.63","-0.70","","","",""],'acierto del modelo':["si","no","no","","","",""]})
     x=x[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
-	x=x.iloc[3:,]
+    x=x.iloc[3:,]
     return render_template('last_batch.html', values_prediccion=prediccion,values_real=real,values_precios=precios, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
    
 
