@@ -93,7 +93,7 @@ def line_chart():
     dataframe3=dataframe3[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
     dataframe4=pd.DataFrame({'fecha':["27-08-2018","28-08-2018","29-08-2018","30-08-2018","31-08-2018","03-09-2018","04-09-2018"],'precio de cierre':["16.32","16.37","16.55","16.22","16.05","16.10","15.79"],'tasa de cambio':["","","","","","",""],'acierto del modelo':["no","no","no","si","si","si","no"]})
     dataframe4=dataframe4[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
-    dataframe5=pd.DataFrame({'fecha':["03-09-2018","04-09-2018","05-09-2018","06-09-2018","07-09-2018","10-09-2018","11-09-2018"],'precio de cierre':["16.10","15.79","15.30","15.51","15.71","15.71","15.60"],'tasa de cambio':["","","","","","",""],'acierto del modelo':["si","si","si","si","si"]})
+    dataframe5=pd.DataFrame({'fecha':["03-09-2018","04-09-2018","05-09-2018","06-09-2018","07-09-2018","10-09-2018","11-09-2018"],'precio de cierre':["16.10","15.79","15.30","15.51","15.71","15.71","15.60"],'tasa de cambio':["","","","","","",""],'acierto del modelo':["si","si","si","si","si","si","si"]})
     dataframe5=dataframe5[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
     dataframe6=pd.DataFrame({'fecha':["10-09-2018","11-09-2018","12-09-2018","13-09-2018","14-09-2018","17-09-2018","18-09-2018"],'precio de cierre':["15.71","15.60","16.05","16.06","15.67","15.55","15.61"],'tasa de cambio':["-3.14","-2.80","-0.31","1.70","2.41","0.25","-0.63"],'acierto del modelo':["no","no","no","si","si","si","no"]})
     dataframe6=dataframe6[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
