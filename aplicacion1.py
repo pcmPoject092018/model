@@ -134,7 +134,7 @@ def last_batch():
     x=pd.DataFrame({'fecha':["17-09-2018","18-09-2018","19-09-2018","20-09-2018","21-09-2018","24-09-2018","25-09-2018"],'precio de cierre':["15.55","15.61","15.60","15.62","","",""],'tasa de cambio':["0.25","-0.63","-0.70","0.12","","",""],'acierto del modelo':["si","no","no","si","","",""]})
     x=x[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
     x=x.iloc[3:,].reset_index(drop=True)
-	x=x.iloc[::-1]
+    x=x.iloc[::-1]
     return render_template('last_batch.html', values_prediccion=prediccion,values_real=real,values_precios=precios, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
    
 
