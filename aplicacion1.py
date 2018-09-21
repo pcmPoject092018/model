@@ -85,8 +85,14 @@ def line_chart():
     interpretacion6[7]="Si el precio de cierre del 07-09-2018 fue de 15.71, el precio de cierre del 18-09-2018 podria ser mayor a 15.71 con una tasa de cambio posiblemente cercana a 3.73."
     interpretaciones=["dummy",interpretacion1,interpretacion2,interpretacion3,interpretacion4,interpretacion5,interpretacion6]
     interpretacion=interpretaciones[number]
-    dataframe1=pd.DataFrame({'fecha':["06-08-2018","07-08-2018","08-08-2018","09-08-2018","10-08-2018","13-08-2018","14-08-2018"],'precio de cierre':["15.72","16.17","16.27","15.94","15.66","15.78","15.9"],'tasa de cambio':["","","2.00","-0.18","-0.88","0.50","1.14"],'acierto del modelo':["no","si","no","si","si","no","si"]})
-    dataframe1=dataframe1[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
+    	
+    dataframe1=pd.read_csv("model/dataframe1.csv",header=0)
+    dataframe1["fecha"]=[str(i) for i in dataframe1["fecha"]]
+    dataframe1["precios"]=[str(i) for i in dataframe1["precios"]]
+    dataframe1["tasa"]=[str(i) for i in dataframe1["tasa"]]
+    dataframe1["acierto del modelo"]=["","","","","","",""]	
+    #pd.DataFrame({'fecha':["06-08-2018","07-08-2018","08-08-2018","09-08-2018","10-08-2018","13-08-2018","14-08-2018"],'precio de cierre':["15.72","16.17","16.27","15.94","15.66","15.78","15.9"],'tasa de cambio':["","","2.00","-0.18","-0.88","0.50","1.14"],'acierto del modelo':["no","si","no","si","si","no","si"]})
+    #dataframe1=dataframe1[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
     dataframe2=pd.DataFrame({'fecha':["13-08-2018","14-08-2018","15-08-2018","16-08-2018","17-08-2018","20-08-2018","21-08-2018"],'precio de cierre':["15.78","15.90","15.71","15.58","15.72","15.98","16.41"],'tasa de cambio':["","","-0.06","-3.64","-3.38","0.25","4.78"],'acierto del modelo':["si","si","no","si","si","si","si"]})
     dataframe2=dataframe2[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
     dataframe3=pd.DataFrame({'fecha':["20-08-2018","21-08-2018","22-08-2018","23-08-2018","24-08-2018","27-08-2018","28-08-2018"],'precio de cierre':["15.98","16.41","16.42","16.02","16.13","16.32","16.37"],'tasa de cambio':["4.78","4.05","0.75","2.67","4.74","4.13",""],'acierto del modelo':["si","si","si","si","si","si","si"]})
