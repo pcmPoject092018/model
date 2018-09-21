@@ -45,8 +45,8 @@ def line_chart():
     dataframe2["acierto del modelo"]=["","","","","","",""]	
     dataframe3["acierto del modelo"]=["","","","","","",""]	
     dataframe4["acierto del modelo"]=["","","","","","",""]	
-    dataframe5["acierto del modelo"]=["","","","","","",""]	
-    dataframe6["acierto del modelo"]=["","","","","","",""]		
+    dataframe5["acierto del modelo"]=["","","","si","si","si","si"]	
+    dataframe6["acierto del modelo"]=["","","","si","si","si","no"]		
     dataframes=["dummy",dataframe1,dataframe2,dataframe3,dataframe4,dataframe5,dataframe6]
     x=dataframes[number]
     x=x.iloc[3:,].reset_index(drop=True) #ultimos 4 pronosticos
@@ -90,12 +90,12 @@ def line_chart():
     interpretacion5={}
     interpretacion5[0]="El modelo sugiere que la tasa de cambio podria ser  negativa a partir del 06-09-2018. Esto implicaria que:"
     interpretacion5[1]="Si el precio de cierre del " + str(dataframe5previous["fecha"][0]) + " fue de " + str(dataframe5previous["precios"][0]) + ", el precio de cierre del " + str(dataframe5["fecha"][0]) + " podria ser mayor a " + str(dataframe5previous["precios"][0]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[7])
-    interpretacion5[2]="Si el precio de cierre del " + str(dataframe5previous["fecha"][1]) + " fue de " + str(dataframe5previous["precios"][1]) + ", el precio de cierre del " + str(dataframe5["fecha"][1]) + " podria ser mayor a " + str(dataframe5previous["precios"][1]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[8])
-    interpretacion5[3]="Si el precio de cierre del " + str(dataframe5previous["fecha"][2]) + " fue de " + str(dataframe5previous["precios"][2]) + ", el precio de cierre del " + str(dataframe5["fecha"][2]) + " podria ser mayor a " + str(dataframe5previous["precios"][2]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[9])
-    interpretacion5[4]="Si el precio de cierre del " + str(dataframe5previous["fecha"][3]) + " fue de " + str(dataframe5previous["precios"][3]) + ", el precio de cierre del " + str(dataframe5["fecha"][3]) + " podria ser mayor a " + str(dataframe5previous["precios"][3]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[10])
-    interpretacion5[5]="Si el precio de cierre del " + str(dataframe5previous["fecha"][4]) + " fue de " + str(dataframe5previous["precios"][4]) + ", el precio de cierre del " + str(dataframe5["fecha"][4]) + " podria ser mayor a " + str(dataframe5previous["precios"][4]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[11])
-    interpretacion5[6]="Si el precio de cierre del " + str(dataframe5previous["fecha"][5]) + " fue de " + str(dataframe5previous["precios"][5]) + ", el precio de cierre del " + str(dataframe5["fecha"][5]) + " podria ser mayor a " + str(dataframe5previous["precios"][5]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[12])
-    interpretacion5[7]="Si el precio de cierre del " + str(dataframe5previous["fecha"][6]) + " fue de " + str(dataframe5previous["precios"][6]) + ", el precio de cierre del " + str(dataframe5["fecha"][6]) + " podria ser mayor a " + str(dataframe5previous["precios"][6]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[13]) 
+    interpretacion5[2]="Si el precio de cierre del " + str(dataframe5previous["fecha"][1]) + " fue de " + str(dataframe5previous["precios"][1]) + ", el precio de cierre del " + str(dataframe5["fecha"][1]) + " podria ser menor a " + str(dataframe5previous["precios"][1]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[8])
+    interpretacion5[3]="Si el precio de cierre del " + str(dataframe5previous["fecha"][2]) + " fue de " + str(dataframe5previous["precios"][2]) + ", el precio de cierre del " + str(dataframe5["fecha"][2]) + " podria ser menor a " + str(dataframe5previous["precios"][2]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[9])
+    interpretacion5[4]="Si el precio de cierre del " + str(dataframe5previous["fecha"][3]) + " fue de " + str(dataframe5previous["precios"][3]) + ", el precio de cierre del " + str(dataframe5["fecha"][3]) + " podria ser menor a " + str(dataframe5previous["precios"][3]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[10])
+    interpretacion5[5]="Si el precio de cierre del " + str(dataframe5previous["fecha"][4]) + " fue de " + str(dataframe5previous["precios"][4]) + ", el precio de cierre del " + str(dataframe5["fecha"][4]) + " podria ser menor a " + str(dataframe5previous["precios"][4]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[11])
+    interpretacion5[6]="Si el precio de cierre del " + str(dataframe5previous["fecha"][5]) + " fue de " + str(dataframe5previous["precios"][5]) + ", el precio de cierre del " + str(dataframe5["fecha"][5]) + " podria ser menor a " + str(dataframe5previous["precios"][5]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[12])
+    interpretacion5[7]="Si el precio de cierre del " + str(dataframe5previous["fecha"][6]) + " fue de " + str(dataframe5previous["precios"][6]) + ", el precio de cierre del " + str(dataframe5["fecha"][6]) + " podria ser menor a " + str(dataframe5previous["precios"][6]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[13]) 
     interpretacion6={}
     interpretacion6[0]="El modelo sugiere que la tasa de cambio podria ser positiva a partir del 13-09-2018. Esto implicaria que:"
     interpretacion6[1]="Si el precio de cierre del " + str(dataframe6previous["fecha"][0]) + " fue de " + str(dataframe6previous["precios"][0]) + ", el precio de cierre del " + str(dataframe6["fecha"][0]) + " podria ser mayor a " + str(dataframe6previous["precios"][0]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[7])
