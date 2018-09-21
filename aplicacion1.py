@@ -114,7 +114,7 @@ def last_batch():
     fullPath='model/predicciones/'
     remainingPath='prediccionFinal.csv'
     df=pd.read_csv(fullPath+remainingPath,header=0)
-    dataframeprevious=pd.read_csv("dataframeprevious.csv",header=0)
+    dataframeprevious=pd.read_csv("model/dataframeprevious.csv",header=0)
     prediccion=df['prediccion'] 
     real=df['real']
     fecha=df['fecha']  
