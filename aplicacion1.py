@@ -147,7 +147,7 @@ def last_batch():
     interpretacion[7]="Si el precio de cierre del " + str(dataframeprevious["fecha"][6]) + " fue de " + str(dataframeprevious["precios"][6]) + ", el precio de cierre del " + str(dataframe["fecha"][6]) + " podría ser mayor a " + str(dataframeprevious["precios"][6]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[13])      
     x=dataframe
     x['acierto del modelo']=["","","","no","","",""]
-    x=x[['fecha','precio de cierre','tasa de cambio','acierto del modelo']]
+    x=x[['fecha','precio de cierre','tasa','acierto del modelo']]
     x=x.iloc[3:,].reset_index(drop=True)
     x=x.iloc[::-1]
     return render_template('last_batch.html', values_prediccion=prediccion,values_real=real,values_precios=precios, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
