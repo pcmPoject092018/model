@@ -24,9 +24,7 @@ def line_chart():
     remainingPath='prediccion'+str(number)+'.csv' 
     df=pd.read_csv(fullPath+remainingPath,header=0) 
     prediccion=df['prediccion']    
-    real=df['real']    
-    fecha=df['fecha']      
-    precios=df['precios']	      	       
+    fecha=df['fecha'] 	      	       
     fechaInicio=fecha[0]  
     fechaFin=fecha[6]
     dataframe1=pd.read_csv("model/dataframe1.csv",header=0)
@@ -49,6 +47,16 @@ def line_chart():
     dataframe8previous=pd.read_csv("model/dataframe8previous.csv",header=0)
     dataframe9previous=pd.read_csv("model/dataframe9previous.csv",header=0)	
     dataframe10previous=pd.read_csv("model/dataframe10previous.csv",header=0)	
+    fulldataframe1=pd.concat([dataframe1previous,dataframe1])	
+    fulldataframe2=pd.concat([dataframe2previous,dataframe2])		
+    fulldataframe3=pd.concat([dataframe3previous,dataframe3])	
+    fulldataframe4=pd.concat([dataframe4previous,dataframe4])	
+    fulldataframe5=pd.concat([dataframe5previous,dataframe5])	
+    fulldataframe6=pd.concat([dataframe6previous,dataframe6])	
+    fulldataframe7=pd.concat([dataframe7previous,dataframe7])	
+    fulldataframe8=pd.concat([dataframe8previous,dataframe8])	
+    fulldataframe9=pd.concat([dataframe9previous,dataframe9])	
+    fulldataframe10=pd.concat([dataframe10previous,dataframe10])	
     dataframe1["acierto del modelo"]=["","","","si","si","no","si"]
     dataframe2["acierto del modelo"]=["","","","si","si","si","si"]	
     dataframe3["acierto del modelo"]=["","","","si","si","si","si"]	
@@ -60,6 +68,7 @@ def line_chart():
     dataframe9["acierto del modelo"]=["","","","si","si","",""]	
     dataframe10["acierto del modelo"]=["","","","","","",""]		
     dataframes=["dummy",dataframe1,dataframe2,dataframe3,dataframe4,dataframe5,dataframe6,dataframe7,dataframe8,dataframe9,dataframe10]
+    fulldataframes=["dummy",fulldataframe1,fulldataframe2,fulldataframe3,fulldataframe4,fulldataframe5,fulldataframe6,fulldataframe7,fulldataframe8,fulldataframe9,fulldataframe10]
     x=dataframes[number]
     x=x.iloc[3:,].reset_index(drop=True) #ultimos 4 pronosticos
     x=x.iloc[::-1]	
@@ -154,7 +163,10 @@ def line_chart():
     interpretacion10[6]="Si el precio de cierre del " + str(dataframe10previous["fecha"][5]) + " fue de " + str(dataframe10previous["precios"][5]) + ", el precio de cierre del " + str(dataframe10["fecha"][5]) + " podría ser menor a " + str(dataframe10previous["precios"][5]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[12])
     interpretacion10[7]="Si el precio de cierre del " + str(dataframe10previous["fecha"][6]) + " fue de " + str(dataframe10previous["precios"][6]) + ", el precio de cierre del " + str(dataframe10["fecha"][6]) + " podría ser menor a " + str(dataframe10previous["precios"][6]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[13])      
     interpretaciones=["dummy",interpretacion1,interpretacion2,interpretacion3,interpretacion4,interpretacion5,interpretacion6,interpretacion7,interpretacion8,interpretacion9,interpretacion10]
-    interpretacion=interpretaciones[number]	
+    interpretacion=interpretaciones[number]
+    fulldataframe=fulldataframes[number]	
+    real=fulldataframe['tasa']         
+    precios=fulldataframe['precios']
     return render_template('line_chart.html', values_prediccion=prediccion,values_real=real,values_precios=precios, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
  
 @app.route("/last_batch",methods=['POST','GET'])	
