@@ -55,7 +55,7 @@ def line_chart():
     dataframe6["acierto del modelo"]=["","","","si","si","si","no"]
     dataframe7["acierto del modelo"]=["","","","si","no","no","no"]	
     dataframe8["acierto del modelo"]=["","","","no","no","no","no"]
-    dataframe9["acierto del modelo"]=["","","","si","","",""]		
+    dataframe9["acierto del modelo"]=["","","","si","si","",""]		
     dataframes=["dummy",dataframe1,dataframe2,dataframe3,dataframe4,dataframe5,dataframe6,dataframe7,dataframe8,dataframe9]
     x=dataframes[number]
     x=x.iloc[3:,].reset_index(drop=True) #ultimos 4 pronosticos
