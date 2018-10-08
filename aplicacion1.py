@@ -166,7 +166,7 @@ def last_batch():
     dataframe=pd.read_csv("model/dataframe.csv",header=0)	
     fulldataframe=pd.concat([dataframeprevious,dataframe])	
     prediccion=df['prediccion'] 
-    real=fulldataframe['real']
+    real=fulldataframe['tasa']
     fecha=df['fecha']  
     fecha=[str(i) for i in fecha]
     precios=fulldataframe['precios']
