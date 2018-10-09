@@ -8,13 +8,4 @@
 .jumbotron{
 	text-align: center;
 }
-.container-fluid{
 
-overflow: hidden;
-	
-}
-
-canvas{
-	width: 75%;
-	height: 300px;
-}
