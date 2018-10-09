@@ -175,9 +175,10 @@ def line_chart():
     x=dataframes[number]
     x['pronóstico tasa']=prediccion[7:]	
     x['pronóstico precios']=precios
-    x=x.iloc[3:,].reset_index(drop=True) #ultimos 4 pronosticos
+    x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa','acierto del modelo']]		
+    x=x.reset_index(drop=True)	
+    x=x.iloc[3:,] #ultimos 4 pronosticos
     x=x.iloc[::-1]		
-    x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa','acierto del modelo']]	
     return render_template('line_chart.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
  
 @app.route("/last_batch",methods=['POST','GET'])	
@@ -210,7 +211,8 @@ def last_batch():
     x['pronóstico tasa']=prediccion[7:]	
     x['pronóstico precios']=precios_prediccion
     x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa','acierto del modelo']]
-    x=x.iloc[3:,].reset_index(drop=True)
+    x=x.reset_index(drop=True)	
+    x=x.iloc[3:,]
     x=x.iloc[::-1]
     return render_template('last_batch.html', values_prediccion=prediccion,values_real=real,values_precios=precios,values_precios_prediccion=precios_prediccion, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
    
