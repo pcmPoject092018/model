@@ -29,4 +29,16 @@ form input{width: 120px; height: 25px;}
 table.dataframe tr:nth-child(odd)		{ background-color:#eee; }
 tr:nth-child(even)	{ background-color:#fff; }
 
+.container-fluid{
+
+width: 90%;
+overflow: hidden;
+	
+}
+
+canvas{
+	width: 100%;
+	height: auto;
+}
+
 /*tr:hover            { background-color: #ffff99;}*/
