@@ -173,7 +173,7 @@ def line_chart():
     precios=fulldataframe['precios']
     precios_prediccion=["","","","","","",""]
     x=dataframes[number]
-    x['pronóstico tasa']=prediccion[7:]	
+    x['pronóstico tasa']=prediccion.tolist()[7:]	
     x['pronóstico precios']=precios_prediccion
     x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa','acierto del modelo']]		
     x=x.reset_index(drop=True)	
@@ -208,7 +208,7 @@ def last_batch():
     x=dataframe
     x['acierto del modelo']=["","","","","","",""]
     precios_prediccion=["","","","","","",""]	
-    x['pronóstico tasa']=prediccion[7:]	
+    x['pronóstico tasa']=prediccion.tolist()[7:]	
     x['pronóstico precios']=precios_prediccion
     x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa','acierto del modelo']]
     x=x.reset_index(drop=True)	
