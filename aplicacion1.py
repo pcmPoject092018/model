@@ -54,16 +54,16 @@ def line_chart():
     dataframe8previous=pd.read_csv("model/dataframe8previous.csv",header=0)
     dataframe9previous=pd.read_csv("model/dataframe9previous.csv",header=0)	
     dataframe10previous=pd.read_csv("model/dataframe10previous.csv",header=0)	
-    fulldataframe1=pd.concat([dataframe1previous,dataframe1])	
-    fulldataframe2=pd.concat([dataframe2previous,dataframe2])		
-    fulldataframe3=pd.concat([dataframe3previous,dataframe3])	
-    fulldataframe4=pd.concat([dataframe4previous,dataframe4])	
-    fulldataframe5=pd.concat([dataframe5previous,dataframe5])	
-    fulldataframe6=pd.concat([dataframe6previous,dataframe6])	
-    fulldataframe7=pd.concat([dataframe7previous,dataframe7])	
-    fulldataframe8=pd.concat([dataframe8previous,dataframe8])	
-    fulldataframe9=pd.concat([dataframe9previous,dataframe9])	
-    fulldataframe10=pd.concat([dataframe10previous,dataframe10])	
+    fulldataframe1=pd.concat([dataframe1previous,dataframe1]).reset_index(drop=True)	
+    fulldataframe2=pd.concat([dataframe2previous,dataframe2]).reset_index(drop=True)			
+    fulldataframe3=pd.concat([dataframe3previous,dataframe3]).reset_index(drop=True)		
+    fulldataframe4=pd.concat([dataframe4previous,dataframe4]).reset_index(drop=True)		
+    fulldataframe5=pd.concat([dataframe5previous,dataframe5]).reset_index(drop=True)		
+    fulldataframe6=pd.concat([dataframe6previous,dataframe6]).reset_index(drop=True)		
+    fulldataframe7=pd.concat([dataframe7previous,dataframe7]).reset_index(drop=True)		
+    fulldataframe8=pd.concat([dataframe8previous,dataframe8]).reset_index(drop=True)		
+    fulldataframe9=pd.concat([dataframe9previous,dataframe9]).reset_index(drop=True)		
+    fulldataframe10=pd.concat([dataframe10previous,dataframe10]).reset_index(drop=True)		
     dataframe1["acierto del modelo"]=["","","","si","si","no","si"]
     dataframe2["acierto del modelo"]=["","","","si","si","si","si"]	
     dataframe3["acierto del modelo"]=["","","","si","si","si","si"]	
@@ -188,7 +188,7 @@ def last_batch():
     df=pd.read_csv(fullPath+remainingPath,header=0)
     dataframeprevious=pd.read_csv("model/dataframeprevious.csv",header=0)
     dataframe=pd.read_csv("model/dataframe.csv",header=0)	
-    fulldataframe=pd.concat([dataframeprevious,dataframe])	
+    fulldataframe=pd.concat([dataframeprevious,dataframe]).reset_index(drop=True)	
     prediccion=df['prediccion'] 
     real=fulldataframe['tasa']
     fecha=df['fecha']  
