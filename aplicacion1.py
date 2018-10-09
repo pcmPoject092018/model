@@ -53,7 +53,17 @@ def line_chart():
     dataframe7previous=pd.read_csv("model/dataframe7previous.csv",header=0)
     dataframe8previous=pd.read_csv("model/dataframe8previous.csv",header=0)
     dataframe9previous=pd.read_csv("model/dataframe9previous.csv",header=0)	
-    dataframe10previous=pd.read_csv("model/dataframe10previous.csv",header=0)	
+    dataframe10previous=pd.read_csv("model/dataframe10previous.csv",header=0)
+    precios1=pd.read_csv("model/precios1.csv",header=0)	
+    precios2=pd.read_csv("model/precios2.csv",header=0)	
+    precios3=pd.read_csv("model/precios3.csv",header=0)	
+    precios4=pd.read_csv("model/precios4.csv",header=0)	
+    precios5=pd.read_csv("model/precios5.csv",header=0)	
+    precios6=pd.read_csv("model/precios6.csv",header=0)	
+    precios7=pd.read_csv("model/precios7.csv",header=0)	
+    precios8=pd.read_csv("model/precios8.csv",header=0)	
+    precios9=pd.read_csv("model/precios9.csv",header=0)	
+    precios10=pd.read_csv("model/precios10.csv",header=0)	
     fulldataframe1=pd.concat([dataframe1previous,dataframe1]).reset_index(drop=True)	
     fulldataframe2=pd.concat([dataframe2previous,dataframe2]).reset_index(drop=True)			
     fulldataframe3=pd.concat([dataframe3previous,dataframe3]).reset_index(drop=True)		
@@ -74,8 +84,6 @@ def line_chart():
     dataframe8["acierto del modelo"]=["","","","no","no","no","no"]
     dataframe9["acierto del modelo"]=["","","","si","si","si",""]	
     dataframe10["acierto del modelo"]=["","","","","","",""]		
-    dataframes=["dummy",dataframe1,dataframe2,dataframe3,dataframe4,dataframe5,dataframe6,dataframe7,dataframe8,dataframe9,dataframe10]
-    fulldataframes=["dummy",fulldataframe1,fulldataframe2,fulldataframe3,fulldataframe4,fulldataframe5,fulldataframe6,fulldataframe7,fulldataframe8,fulldataframe9,fulldataframe10]	
     interpretacion1={}
     interpretacion1[0]="El modelo sugiere que la tasa de cambio podría ser negativa a partir del 09-08-2018 excepto el 14-08-2018. Esto implicaría que:"
     interpretacion1[1]="Si el precio de cierre del " + str(dataframe1previous["fecha"][0]) + " fue de " + str(dataframe1previous["precios"][0]) + ", el precio de cierre del " + str(dataframe1["fecha"][0]) + " podría ser mayor a " + str(dataframe1previous["precios"][0]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[7])
@@ -167,11 +175,21 @@ def line_chart():
     interpretacion10[6]="Si el precio de cierre del " + str(dataframe10previous["fecha"][5]) + " fue de " + str(dataframe10previous["precios"][5]) + ", el precio de cierre del " + str(dataframe10["fecha"][5]) + " podría ser menor a " + str(dataframe10previous["precios"][5]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[12])
     interpretacion10[7]="Si el precio de cierre del " + str(dataframe10previous["fecha"][6]) + " fue de " + str(dataframe10previous["precios"][6]) + ", el precio de cierre del " + str(dataframe10["fecha"][6]) + " podría ser menor a " + str(dataframe10previous["precios"][6]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[13])      
     interpretaciones=["dummy",interpretacion1,interpretacion2,interpretacion3,interpretacion4,interpretacion5,interpretacion6,interpretacion7,interpretacion8,interpretacion9,interpretacion10]
+    dataframes=["dummy",dataframe1,dataframe2,dataframe3,dataframe4,dataframe5,dataframe6,dataframe7,dataframe8,dataframe9,dataframe10]
+    fulldataframes=["dummy",fulldataframe1,fulldataframe2,fulldataframe3,fulldataframe4,fulldataframe5,fulldataframe6,fulldataframe7,fulldataframe8,fulldataframe9,fulldataframe10]	
+    prices=["dummy",precios1,precios2,precios3,precios4,precios5,precios6,precios7,precios8,precios9,precios10]
     interpretacion=interpretaciones[number]
+    price=prices[number]	
     fulldataframe=fulldataframes[number]	
     real=fulldataframe['tasa']         
     precios=fulldataframe['precios']
-    precios_prediccion=["","","","","","",""]
+    #build predicted prices
+    previous_real_prices_first_half=price['precios'].tolist()[0:7]
+    predicted_rates_first_half=prediccion.tolist()[0:7]	
+    previous_real_prices_second_half=price['precios'].tolist()[7:]
+    predicted_rates_second_half=prediccion.tolist()[7:]		
+    precios_prediccion=predicted_prices(predicted_rates_first_half,previous_real_prices_first_half)+predicted_prices(predicted_rates_second_half,previous_real_prices_second_half)	
+    #
     x=dataframes[number]
     x['pronóstico tasa']=prediccion.tolist()[7:]	
     x['pronóstico precios']=precios_prediccion
@@ -189,11 +207,19 @@ def last_batch():
     dataframeprevious=pd.read_csv("model/dataframeprevious.csv",header=0)
     dataframe=pd.read_csv("model/dataframe.csv",header=0)	
     fulldataframe=pd.concat([dataframeprevious,dataframe]).reset_index(drop=True)	
+    price=pd.read_csv("model/precios.csv",header=0)	
     prediccion=df['prediccion'] 
     real=fulldataframe['tasa']
     fecha=df['fecha']  
     fecha=[str(i) for i in fecha]
     precios=fulldataframe['precios']
+    #build predicted prices
+    previous_real_prices_first_half=price['precios'].tolist()[0:7]
+    predicted_rates_first_half=prediccion.tolist()[0:7]	
+    previous_real_prices_second_half=price['precios'].tolist()[7:]
+    predicted_rates_second_half=prediccion.tolist()[7:]		
+    precios_prediccion=predicted_prices(predicted_rates_first_half,previous_real_prices_first_half)+predicted_prices(predicted_rates_second_half,previous_real_prices_second_half)	
+    #
     fechaInicio=fecha[0]
     fechaFin=fecha[6]
     interpretacion={}
@@ -207,7 +233,6 @@ def last_batch():
     interpretacion[7]="Si el precio de cierre del " + str(dataframeprevious["fecha"][6]) + " fue de " + str(dataframeprevious["precios"][6]) + ", el precio de cierre del " + str(dataframe["fecha"][6]) + " podría ser mayor a " + str(dataframeprevious["precios"][6]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[13])      
     x=dataframe
     x['acierto del modelo']=["","","","","","",""]
-    precios_prediccion=["","","","","","",""]	
     x['pronóstico tasa']=prediccion.tolist()[7:]	
     x['pronóstico precios']=precios_prediccion
     x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa','acierto del modelo']]
