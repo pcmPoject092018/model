@@ -8,3 +8,14 @@
 .jumbotron{
 	text-align: center;
 }
+.container-fluid{
+
+width: 90%;
+overflow: hidden;
+	
+}
+
+canvas{
+	width: 100%;
+	height: auto;
+}
