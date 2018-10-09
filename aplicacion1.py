@@ -75,10 +75,7 @@ def line_chart():
     dataframe9["acierto del modelo"]=["","","","si","si","si",""]	
     dataframe10["acierto del modelo"]=["","","","","","",""]		
     dataframes=["dummy",dataframe1,dataframe2,dataframe3,dataframe4,dataframe5,dataframe6,dataframe7,dataframe8,dataframe9,dataframe10]
-    fulldataframes=["dummy",fulldataframe1,fulldataframe2,fulldataframe3,fulldataframe4,fulldataframe5,fulldataframe6,fulldataframe7,fulldataframe8,fulldataframe9,fulldataframe10]
-    x=dataframes[number]
-    x=x.iloc[3:,].reset_index(drop=True) #ultimos 4 pronosticos
-    x=x.iloc[::-1]		
+    fulldataframes=["dummy",fulldataframe1,fulldataframe2,fulldataframe3,fulldataframe4,fulldataframe5,fulldataframe6,fulldataframe7,fulldataframe8,fulldataframe9,fulldataframe10]	
     interpretacion1={}
     interpretacion1[0]="El modelo sugiere que la tasa de cambio podría ser negativa a partir del 09-08-2018 excepto el 14-08-2018. Esto implicaría que:"
     interpretacion1[1]="Si el precio de cierre del " + str(dataframe1previous["fecha"][0]) + " fue de " + str(dataframe1previous["precios"][0]) + ", el precio de cierre del " + str(dataframe1["fecha"][0]) + " podría ser mayor a " + str(dataframe1previous["precios"][0]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[7])
@@ -175,6 +172,12 @@ def line_chart():
     real=fulldataframe['tasa']         
     precios=fulldataframe['precios']
     precios_prediccion=["","","","","","","","","","","","","",""]
+    x=dataframes[number]
+    x['pronóstico tasa']=prediccion	
+    x['pronóstico precios']=precios
+    x=x.iloc[3:,].reset_index(drop=True) #ultimos 4 pronosticos
+    x=x.iloc[::-1]		
+    x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa','acierto del modelo']]	
     return render_template('line_chart.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
  
 @app.route("/last_batch",methods=['POST','GET'])	
@@ -203,10 +206,12 @@ def last_batch():
     interpretacion[7]="Si el precio de cierre del " + str(dataframeprevious["fecha"][6]) + " fue de " + str(dataframeprevious["precios"][6]) + ", el precio de cierre del " + str(dataframe["fecha"][6]) + " podría ser mayor a " + str(dataframeprevious["precios"][6]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[13])      
     x=dataframe
     x['acierto del modelo']=["","","","","","",""]
-    x=x[['fecha','precios','tasa','acierto del modelo']]
+    precios_prediccion=["","","","","","","","","","","","","",""]	
+    x['pronóstico tasa']=prediccion	
+    x['pronóstico precios']=precios_prediccion
+    x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa','acierto del modelo']]
     x=x.iloc[3:,].reset_index(drop=True)
     x=x.iloc[::-1]
-    precios_prediccion=["","","","","","","","","","","","","",""]
     return render_template('last_batch.html', values_prediccion=prediccion,values_real=real,values_precios=precios,values_precios_prediccion=precios_prediccion, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
    
 
