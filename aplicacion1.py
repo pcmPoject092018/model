@@ -171,7 +171,7 @@ def line_chart():
     fulldataframe=fulldataframes[number]	
     real=fulldataframe['tasa']         
     precios=fulldataframe['precios']
-    precios_prediccion=["","","","","","","","","","","","","",""]
+    precios_prediccion=["","","","","","",""]
     x=dataframes[number]
     x['pronóstico tasa']=prediccion	
     x['pronóstico precios']=precios
@@ -206,7 +206,7 @@ def last_batch():
     interpretacion[7]="Si el precio de cierre del " + str(dataframeprevious["fecha"][6]) + " fue de " + str(dataframeprevious["precios"][6]) + ", el precio de cierre del " + str(dataframe["fecha"][6]) + " podría ser mayor a " + str(dataframeprevious["precios"][6]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[13])      
     x=dataframe
     x['acierto del modelo']=["","","","","","",""]
-    precios_prediccion=["","","","","","","","","","","","","",""]	
+    precios_prediccion=["","","","","","",""]	
     x['pronóstico tasa']=prediccion	
     x['pronóstico precios']=precios_prediccion
     x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa','acierto del modelo']]
