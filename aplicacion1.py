@@ -19,6 +19,15 @@ def predicted_prices(predicted_rates,previous_real_prices):
         predicted_price=previous_real_prices[i]+(predicted_rates[i]*previous_real_prices[i])/100        	 
         predicted_prices.append(predicted_price)
     return predicted_prices
+	
+	            
+def RSME(lista1,lista2):
+    lista=[]
+    for i in range(len(lista1)):
+        square=(lista1[i]-lista2[i])*(lista1[i]-lista2[i])
+        lista.append(square)
+    rsme=sum(lista)/len(lista)
+    return math.sqrt(rsme)  
 		
 @app.route("/")  
 def main():
@@ -197,7 +206,8 @@ def line_chart():
     x=x.reset_index(drop=True)	
     x=x.iloc[3:,] #ultimos 4 pronosticos
     x=x.iloc[::-1]		
-    return render_template('line_chart.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
+    error_precios=RMSE(precios[0:7],precios_prediccion[0:7])	
+    return render_template('line_chart.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion,error_precios=error_precios)
  
 @app.route("/last_batch",methods=['POST','GET'])	
 def last_batch():   
@@ -239,7 +249,8 @@ def last_batch():
     x=x.reset_index(drop=True)	
     x=x.iloc[3:,]
     x=x.iloc[::-1]
-    return render_template('last_batch.html', values_prediccion=prediccion,values_real=real,values_precios=precios,values_precios_prediccion=precios_prediccion, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion)
+    error_precios=RMSE(precios[0:7],precios_prediccion[0:7])
+    return render_template('last_batch.html', values_prediccion=prediccion,values_real=real,values_precios=precios,values_precios_prediccion=precios_prediccion, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion,precios_prediccion=precios_prediccion,error_precios=error_precios)
    
 
    
