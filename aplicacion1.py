@@ -206,7 +206,7 @@ def line_chart():
     x=x.reset_index(drop=True)	
     x=x.iloc[3:,] #ultimos 4 pronosticos
     x=x.iloc[::-1]		
-    error_precios=RMSE(precios[0:7],precios_prediccion[0:7])	
+    error_precios=RSME(precios[0:7],precios_prediccion[0:7])	
     return render_template('line_chart.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion,error_precios=error_precios)
  
 @app.route("/last_batch",methods=['POST','GET'])	
@@ -249,7 +249,7 @@ def last_batch():
     x=x.reset_index(drop=True)	
     x=x.iloc[3:,]
     x=x.iloc[::-1]
-    error_precios=RMSE(precios[0:7],precios_prediccion[0:7])
+    error_precios=RSME(precios[0:7],precios_prediccion[0:7])
     return render_template('last_batch.html', values_prediccion=prediccion,values_real=real,values_precios=precios,values_precios_prediccion=precios_prediccion, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],interpretacion=interpretacion,precios_prediccion=precios_prediccion,error_precios=error_precios)
    
 
