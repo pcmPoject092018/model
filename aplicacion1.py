@@ -71,7 +71,7 @@ def line_chart():
     precios4=pd.read_csv("model/precios4.csv",header=0)	
     precios5=pd.read_csv("model/precios5.csv",header=0)	
     precios6=pd.read_csv("model/precios6.csv",header=0)	
-    precios7=pd.read_csv("model/precios7.csv",header=0)	
+    precios7=pd.read_csv("model/precios7.csv",header=0)	 
     precios8=pd.read_csv("model/precios8.csv",header=0)	
     precios9=pd.read_csv("model/precios9.csv",header=0)	
     precios10=pd.read_csv("model/precios10.csv",header=0)
