@@ -86,7 +86,7 @@ def line_chart():
     fulldataframe8=pd.concat([dataframe8previous,dataframe8]).reset_index(drop=True)		
     fulldataframe9=pd.concat([dataframe9previous,dataframe9]).reset_index(drop=True)		
     fulldataframe10=pd.concat([dataframe10previous,dataframe10]).reset_index(drop=True)	
-    fulldataframe11=pd.concat([dataframe10previous,dataframe11]).reset_index(drop=True)		
+    fulldataframe11=pd.concat([dataframe11previous,dataframe11]).reset_index(drop=True)		
     dataframe1["acierto del modelo"]=["","","","si","si","no","si"]
     dataframe2["acierto del modelo"]=["","","","si","si","si","si"]	
     dataframe3["acierto del modelo"]=["","","","si","si","si","si"]	
