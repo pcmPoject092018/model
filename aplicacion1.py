@@ -92,7 +92,7 @@ def line_chart():
     dataframe7["acierto del modelo"]=["","","","si","no","no","no"]	  
     dataframe8["acierto del modelo"]=["","","","no","no","no","no"]
     dataframe9["acierto del modelo"]=["","","","si","si","si","no"]	
-    dataframe10["acierto del modelo"]=["","","","no","","",""]		
+    dataframe10["acierto del modelo"]=["","","","no","si","",""]		
     interpretacion1={}
     interpretacion1[0]="El modelo sugiere que la tasa de cambio podría ser negativa a partir del 09-08-2018 excepto el 14-08-2018. Esto implicaría que:"
     interpretacion1[1]="Si el precio de cierre del " + str(dataframe1previous["fecha"][0]) + " fue de " + str(dataframe1previous["precios"][0]) + ", el precio de cierre del " + str(dataframe1["fecha"][0]) + " podría ser mayor a " + str(dataframe1previous["precios"][0]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[7])
