@@ -53,6 +53,7 @@ def line_chart():
     dataframe8=pd.read_csv("model/dataframe8.csv",header=0)
     dataframe9=pd.read_csv("model/dataframe9.csv",header=0)
     dataframe10=pd.read_csv("model/dataframe10.csv",header=0)
+    dataframe11=pd.read_csv("model/dataframe11.csv",header=0)
     dataframe1previous=pd.read_csv("model/dataframe1previous.csv",header=0)
     dataframe2previous=pd.read_csv("model/dataframe2previous.csv",header=0)
     dataframe3previous=pd.read_csv("model/dataframe3previous.csv",header=0)
@@ -63,6 +64,7 @@ def line_chart():
     dataframe8previous=pd.read_csv("model/dataframe8previous.csv",header=0)
     dataframe9previous=pd.read_csv("model/dataframe9previous.csv",header=0)	
     dataframe10previous=pd.read_csv("model/dataframe10previous.csv",header=0)
+    dataframe11previous=pd.read_csv("model/dataframe11previous.csv",header=0)	
     precios1=pd.read_csv("model/precios1.csv",header=0)	
     precios2=pd.read_csv("model/precios2.csv",header=0)	
     precios3=pd.read_csv("model/precios3.csv",header=0)	
@@ -72,7 +74,8 @@ def line_chart():
     precios7=pd.read_csv("model/precios7.csv",header=0)	
     precios8=pd.read_csv("model/precios8.csv",header=0)	
     precios9=pd.read_csv("model/precios9.csv",header=0)	
-    precios10=pd.read_csv("model/precios10.csv",header=0)	
+    precios10=pd.read_csv("model/precios10.csv",header=0)
+    precios11=pd.read_csv("model/precios11.csv",header=0)	
     fulldataframe1=pd.concat([dataframe1previous,dataframe1]).reset_index(drop=True)	
     fulldataframe2=pd.concat([dataframe2previous,dataframe2]).reset_index(drop=True)			
     fulldataframe3=pd.concat([dataframe3previous,dataframe3]).reset_index(drop=True)		
@@ -82,7 +85,8 @@ def line_chart():
     fulldataframe7=pd.concat([dataframe7previous,dataframe7]).reset_index(drop=True)		
     fulldataframe8=pd.concat([dataframe8previous,dataframe8]).reset_index(drop=True)		
     fulldataframe9=pd.concat([dataframe9previous,dataframe9]).reset_index(drop=True)		
-    fulldataframe10=pd.concat([dataframe10previous,dataframe10]).reset_index(drop=True)		
+    fulldataframe10=pd.concat([dataframe10previous,dataframe10]).reset_index(drop=True)	
+    fulldataframe11=pd.concat([dataframe10previous,dataframe11]).reset_index(drop=True)		
     dataframe1["acierto del modelo"]=["","","","si","si","no","si"]
     dataframe2["acierto del modelo"]=["","","","si","si","si","si"]	
     dataframe3["acierto del modelo"]=["","","","si","si","si","si"]	
@@ -92,7 +96,8 @@ def line_chart():
     dataframe7["acierto del modelo"]=["","","","si","no","no","no"]	  
     dataframe8["acierto del modelo"]=["","","","no","no","no","no"]
     dataframe9["acierto del modelo"]=["","","","si","si","si","no"]	
-    dataframe10["acierto del modelo"]=["","","","no","si","",""]		
+    dataframe10["acierto del modelo"]=["","","","no","si","",""]
+    dataframe11["acierto del modelo"]=["","","","","","",""]	
     interpretacion1={}
     interpretacion1[0]="El modelo sugiere que la tasa de cambio podría ser negativa a partir del 09-08-2018 excepto el 14-08-2018. Esto implicaría que:"
     interpretacion1[1]="Si el precio de cierre del " + str(dataframe1previous["fecha"][0]) + " fue de " + str(dataframe1previous["precios"][0]) + ", el precio de cierre del " + str(dataframe1["fecha"][0]) + " podría ser mayor a " + str(dataframe1previous["precios"][0]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[7])
@@ -183,10 +188,19 @@ def line_chart():
     interpretacion10[5]="Si el precio de cierre del " + str(dataframe10previous["fecha"][4]) + " fue de " + str(dataframe10previous["precios"][4]) + ", el precio de cierre del " + str(dataframe10["fecha"][4]) + " podría ser menor a " + str(dataframe10previous["precios"][4]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[11])
     interpretacion10[6]="Si el precio de cierre del " + str(dataframe10previous["fecha"][5]) + " fue de " + str(dataframe10previous["precios"][5]) + ", el precio de cierre del " + str(dataframe10["fecha"][5]) + " podría ser menor a " + str(dataframe10previous["precios"][5]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[12])
     interpretacion10[7]="Si el precio de cierre del " + str(dataframe10previous["fecha"][6]) + " fue de " + str(dataframe10previous["precios"][6]) + ", el precio de cierre del " + str(dataframe10["fecha"][6]) + " podría ser menor a " + str(dataframe10previous["precios"][6]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[13])      
-    interpretaciones=["dummy",interpretacion1,interpretacion2,interpretacion3,interpretacion4,interpretacion5,interpretacion6,interpretacion7,interpretacion8,interpretacion9,interpretacion10]
-    dataframes=["dummy",dataframe1,dataframe2,dataframe3,dataframe4,dataframe5,dataframe6,dataframe7,dataframe8,dataframe9,dataframe10]
-    fulldataframes=["dummy",fulldataframe1,fulldataframe2,fulldataframe3,fulldataframe4,fulldataframe5,fulldataframe6,fulldataframe7,fulldataframe8,fulldataframe9,fulldataframe10]	
-    prices=["dummy",precios1,precios2,precios3,precios4,precios5,precios6,precios7,precios8,precios9,precios10]
+    interpretacion11={}
+    interpretacion11[0]="El modelo sugiere que la tasa de cambio podría ser positiva a partir del 11-10-2018 Esto implicaría que:"
+    interpretacion11[1]="Si el precio de cierre del " + str(dataframe11previous["fecha"][0]) + " fue de " + str(dataframe11previous["precios"][0]) + ", el precio de cierre del " + str(dataframe11["fecha"][0]) + " podría ser ... a " + str(dataframe11previous["precios"][0]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[7])
+    interpretacion11[2]="Si el precio de cierre del " + str(dataframe11previous["fecha"][1]) + " fue de " + str(dataframe11previous["precios"][1]) + ", el precio de cierre del " + str(dataframe11["fecha"][1]) + " podría ser ... a " + str(dataframe11previous["precios"][1]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[8])
+    interpretacion11[3]="Si el precio de cierre del " + str(dataframe11previous["fecha"][2]) + " fue de " + str(dataframe11previous["precios"][2]) + ", el precio de cierre del " + str(dataframe11["fecha"][2]) + " podría ser ... a " + str(dataframe11previous["precios"][2]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[9])
+    interpretacion11[4]="Si el precio de cierre del " + str(dataframe11previous["fecha"][3]) + " fue de " + str(dataframe11previous["precios"][3]) + ", el precio de cierre del " + str(dataframe11["fecha"][3]) + " podría ser mayor a " + str(dataframe11previous["precios"][3]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[10])
+    interpretacion11[5]="Si el precio de cierre del " + str(dataframe11previous["fecha"][4]) + " fue de " + str(dataframe11previous["precios"][4]) + ", el precio de cierre del " + str(dataframe11["fecha"][4]) + " podría ser mayor a " + str(dataframe11previous["precios"][4]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[11])
+    interpretacion11[6]="Si el precio de cierre del " + str(dataframe11previous["fecha"][5]) + " fue de " + str(dataframe11previous["precios"][5]) + ", el precio de cierre del " + str(dataframe11["fecha"][5]) + " podría ser mayor a " + str(dataframe11previous["precios"][5]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[12])
+    interpretacion11[7]="Si el precio de cierre del " + str(dataframe11previous["fecha"][6]) + " fue de " + str(dataframe11previous["precios"][6]) + ", el precio de cierre del " + str(dataframe11["fecha"][6]) + " podría ser mayor a " + str(dataframe11previous["precios"][6]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[13])       
+    interpretaciones=["dummy",interpretacion1,interpretacion2,interpretacion3,interpretacion4,interpretacion5,interpretacion6,interpretacion7,interpretacion8,interpretacion9,interpretacion10,interpretacion11]
+    dataframes=["dummy",dataframe1,dataframe2,dataframe3,dataframe4,dataframe5,dataframe6,dataframe7,dataframe8,dataframe9,dataframe10,dataframe11]
+    fulldataframes=["dummy",fulldataframe1,fulldataframe2,fulldataframe3,fulldataframe4,fulldataframe5,fulldataframe6,fulldataframe7,fulldataframe8,fulldataframe9,fulldataframe10,fulldataframe11]	
+    prices=["dummy",precios1,precios2,precios3,precios4,precios5,precios6,precios7,precios8,precios9,precios10,precios11]
     interpretacion=interpretaciones[number]
     price=prices[number]	
     fulldataframe=fulldataframes[number]	
@@ -233,7 +247,7 @@ def last_batch():
     fechaInicio=fecha[0]
     fechaFin=fecha[6]
     interpretacion={}
-    interpretacion[0]="El modelo sugiere que la tasa de cambio podría ser positiva a partir del 11-10-2018 Esto implicaría que:"
+    interpretacion[0]="El modelo sugiere que la tasa de cambio podría ser positiva a partir del 16-10-2018. Esto implicaría que:"
     interpretacion[1]="Si el precio de cierre del " + str(dataframeprevious["fecha"][0]) + " fue de " + str(dataframeprevious["precios"][0]) + ", el precio de cierre del " + str(dataframe["fecha"][0]) + " podría ser ... a " + str(dataframeprevious["precios"][0]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[7])
     interpretacion[2]="Si el precio de cierre del " + str(dataframeprevious["fecha"][1]) + " fue de " + str(dataframeprevious["precios"][1]) + ", el precio de cierre del " + str(dataframe["fecha"][1]) + " podría ser ... a " + str(dataframeprevious["precios"][1]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[8])
     interpretacion[3]="Si el precio de cierre del " + str(dataframeprevious["fecha"][2]) + " fue de " + str(dataframeprevious["precios"][2]) + ", el precio de cierre del " + str(dataframe["fecha"][2]) + " podría ser ... a " + str(dataframeprevious["precios"][2]) +" con una tasa de cambio posiblemente cercana a " + str(prediccion[9])
