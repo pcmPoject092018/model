@@ -39,7 +39,7 @@ def line_chart():
     number = request.form.get('ejemplo',type=int)
     predicciones=[pd.read_csv(file,header=0) for file in glob.glob('model/predicciones/*.csv')]	
     prediccion=predicciones[number]['prediccion']    
-    fecha=df['fecha'] 	      	       
+    fecha=predicciones[number]['fecha'] 	      	       
     fechaInicio=fecha[0]  
     fechaFin=fecha[6]
     dataframes=[pd.read_csv(file,header=0) for file in glob.glob('model/dataframes/*.csv')]
@@ -73,7 +73,7 @@ def last_batch():
     fulldataframe=pd.concat([dataframeprevious,dataframe]).reset_index(drop=True)	
     price=pd.read_csv("model/precios/precios0.csv",header=0)	
     real=fulldataframe['tasa']
-    fecha=df['fecha']  
+    fecha=pd.read_csv('model/predicciones/prediccion0.csv',header=0)['fecha'] 
     fecha=[str(i) for i in fecha]
     precios=fulldataframe['precios']
     #build predicted prices
