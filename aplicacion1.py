@@ -47,7 +47,7 @@ def line_chart():
     dataframes=[pd.read_csv(file,header=0) for file in glob.glob('model/dataframes/*.csv')]
     dataframesprevious=[pd.read_csv(file,header=0) for file in glob.glob('model/dataframesprevious/*.csv')]	
     prices=[pd.read_csv(file,header=0) for file in glob.glob('model/precios/*.csv')]  
-    fulldataframes=[pd.concat([dataframeprevious[i],dataframes[i]]).reset_index(drop=True) for i in range(len(dataframes))]  	
+    fulldataframes=[pd.concat([dataframesprevious[i],dataframes[i]]).reset_index(drop=True) for i in range(len(dataframes))]  	
     price=prices[number]	
     fulldataframe=fulldataframes[number]	
     real=fulldataframe['tasa']         
