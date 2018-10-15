@@ -68,7 +68,7 @@ def line_chart():
 @app.route("/last_batch",methods=['POST','GET'])	
 def last_batch():   
     df=pd.read_csv('model/predicciones/prediccion0.csv',header=0)
-	prediccion=df['prediccion']
+    prediccion=df['prediccion']
     dataframeprevious=pd.read_csv("model/dataframesprevious/dataframeprevious0.csv",header=0)
     dataframe=pd.read_csv("model/dataframes/dataframe0.csv",header=0)	
     fulldataframe=pd.concat([dataframeprevious,dataframe]).reset_index(drop=True)	
