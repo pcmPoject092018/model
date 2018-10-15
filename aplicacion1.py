@@ -37,9 +37,9 @@ def main():
 @app.route("/line_chart",methods=['POST','GET']) 
 def line_chart():  
     number = request.form.get('ejemplo',type=int)
-    predicciones=[pd.read_csv(file,header=0) for file in glob.glob('model/predicciones/*.csv')]	
-    prediccion=predicciones[number]['prediccion']    
-    fecha=predicciones[number]['fecha'] 	      	       
+    dfs=[pd.read_csv(file,header=0) for file in glob.glob('model/predicciones/*.csv')]	
+    prediccion=dfs[number]['prediccion']    
+    fecha=dfs[number]['fecha'] 	      	       
     fechaInicio=fecha[0]  
     fechaFin=fecha[6]
     dataframes=[pd.read_csv(file,header=0) for file in glob.glob('model/dataframes/*.csv')]
@@ -67,13 +67,14 @@ def line_chart():
  
 @app.route("/last_batch",methods=['POST','GET'])	
 def last_batch():   
-    prediccion=pd.read_csv('model/predicciones/prediccion0.csv',header=0)['prediccion']
+    df=pd.read_csv('model/predicciones/prediccion0.csv',header=0)
+	prediccion=df['prediccion']
     dataframeprevious=pd.read_csv("model/dataframesprevious/dataframeprevious0.csv",header=0)
     dataframe=pd.read_csv("model/dataframes/dataframe0.csv",header=0)	
     fulldataframe=pd.concat([dataframeprevious,dataframe]).reset_index(drop=True)	
     price=pd.read_csv("model/precios/precios0.csv",header=0)	
     real=fulldataframe['tasa']
-    fecha=pd.read_csv('model/predicciones/prediccion0.csv',header=0)['fecha'] 
+    fecha=df['fecha'] 
     fecha=[str(i) for i in fecha]
     precios=fulldataframe['precios']
     #build predicted prices
