@@ -34,8 +34,8 @@ def RSME(lista1,lista2):
 def main():
     return render_template('main.html')
 
-@app.route("/line_chart",methods=['POST','GET']) 
-def line_chart():  
+@app.route("/pronosticoAMXL",methods=['POST','GET']) 
+def pronosticoAMXL():  
     number = request.form.get('ejemplo',type=int)
     dfs=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/predicciones/*.csv'))]	
     prediccion=dfs[number]['prediccion']    
@@ -63,38 +63,8 @@ def line_chart():
     x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa']]		
     x=x.reset_index(drop=True)		
     error_precios=RSME(precios[0:7],precios_prediccion[0:7])	
-    return render_template('line_chart.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],error_precios=error_precios)
+    return render_template('pronosticoAMXL.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],error_precios=error_precios)
  
-@app.route("/last_batch",methods=['POST','GET'])	
-def last_batch():   
-    df=pd.read_csv('model/predicciones/prediccion0.csv',header=0)
-    prediccion=df['prediccion']
-    dataframeprevious=pd.read_csv("model/dataframesprevious/dataframeprevious0.csv",header=0)
-    dataframe=pd.read_csv("model/dataframes/dataframe0.csv",header=0)	
-    fulldataframe=pd.concat([dataframeprevious,dataframe]).reset_index(drop=True)	
-    price=pd.read_csv("model/precios/precios0.csv",header=0)	
-    real=fulldataframe['tasa']
-    fecha=df['fecha'] 
-    fecha=[str(i) for i in fecha]
-    precios=fulldataframe['precios']
-    #build predicted prices
-    previous_real_prices_first_half=price['precios'].tolist()[0:7]
-    predicted_rates_first_half=prediccion.tolist()[0:7]	
-    previous_real_prices_second_half=price['precios'].tolist()[7:]
-    predicted_rates_second_half=prediccion.tolist()[7:]		
-    precios_prediccion=predicted_prices(predicted_rates_first_half,previous_real_prices_first_half)+predicted_prices(predicted_rates_second_half,previous_real_prices_second_half)	
-    #
-    fechaInicio=fecha[0]
-    fechaFin=fecha[6]
-    x=dataframe
-    x['pronóstico tasa']=prediccion.tolist()[7:]	
-    x['pronóstico precios']=precios_prediccion[7:]
-    x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa']]
-    x=x.reset_index(drop=True)	
-    error_precios=RSME(precios[0:7],precios_prediccion[0:7])
-    return render_template('last_batch.html', values_prediccion=prediccion,values_real=real,values_precios=precios,values_precios_prediccion=precios_prediccion, labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],precios_prediccion=precios_prediccion,error_precios=error_precios)
-   
-
    
 if __name__ == "__main__":
     #app.run(debug=True,port=5000)

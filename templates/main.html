@@ -29,39 +29,17 @@
 	</div>
 	<hr>
 
-	<div class="container-fluid">
-		<div class="row">		
-			<div class="col-md-4">
-			</div>
-			<div class="col-md-4">
-				<h2>Pronóstico actual</h2>
-				<!--<form class="form-signin" action = "http://127.0.0.1:5000/last_batch" method = "POST">-->
-				<form class="form-signin" action = "/last_batch" method = "POST">
-					<div class="form-group">
-						<label for="last" class="sr-only">Pronóstico actual</label>
-						<select class="form-control" name="last" id="last" required>
-							<option value="Final" label="15-10-2018" selected>15-10-2018</option>
-						</select> 
-					</div>
-					<button type="submit" class="btn btn-default btn-lg"><i class="fa fa-line-chart" aria-hidden="true"></i> Consultar</button>
-				</form>
-			</div>
-			<div class="col-md-4">
-			</div>
-		</div>
-
-		<br><br>
-
 		<div class="row">		
 			<div class="col-md-4">
 			</div>
 			<div class="col-lg-4">
 				<h2>Seleccionar pronósticos anteriores</h2>	
 				<!--<form class="form-signin" action = "http://127.0.0.1:5000/line_chart" method = "POST">-->
-                <form class="form-signin" action = "/line_chart" method = "POST">				
+                <form class="form-signin" action = "/pronosticoAMXL" method = "POST">				
 					<div class="form-group">
 						<label for="ejemplo" class="sr-only">Pronósticos anteriores</label>
 						<select class="form-control" name="ejemplo" id="ejemplo" required>
+						    <option value="0" label="15-10-2018">15-10-2018</option>
 						    <option value="12" label="11-10-2018">11-10-2018</option>
 							<option value="11" label="08-10-2018">08-10-2018</option>
 						    <option value="10" label="04-10-2018">04-10-2018</option>
