@@ -24,7 +24,7 @@
 	<!-- Main jumbotron for a primary marketing message or call to action -->
 	<div class="jumbotron" style="background: #727175; color: #fff;">
 		<div class="container-fluid">
-			<h2>Pronóstico de tasa de cambio a 7 días del precio de cierre de America Movil SAB de CV (AMXL).</h2>
+			<h2>America Movil SAB de CV (AMXL).</h2>
 		</div>
 	</div>
 	<hr>
@@ -39,7 +39,8 @@
 					<div class="form-group">
 						<label for="ejemplo" class="sr-only">Pronósticos anteriores</label>
 						<select class="form-control" name="ejemplo" id="ejemplo" required>
-						    <option value="0" label="15-10-2018">15-10-2018</option>
+						    <option value="0" label="16-10-2018" selected>16-10-2018</option>
+						    <option value="13" label="15-10-2018">15-10-2018</option>
 						    <option value="12" label="11-10-2018">11-10-2018</option>
 							<option value="11" label="08-10-2018">08-10-2018</option>
 						    <option value="10" label="04-10-2018">04-10-2018</option>
@@ -62,24 +63,6 @@
 		</div>	
 
 		<hr>
-		<div class="jumbotron">
-	<div class="container-fluid">
-        <div class="list-group-item active">
-	    <p style="font-size:25px;" >La tasa de cambio se toma con respecto a 8 días atrás del precio correspondiente. La fórmula usada es (precio actual - precio de hace 8 días)/precio de hace 8 días, multiplicado por 100.</p>
-	    <p style="font-size:25px;">El pronóstico es un promedio de las mejores aproximaciones alcanzadas con el modelo (*).</p>
-	    <p style="font-size:25px;">La actualización del modelo se realiza con los precios de cierre disponibles hasta el último día hábil anterior a la fecha de actualización. La parte en gris de cada gráfica corresponde a los datos disponibles hasta la fecha de la actualización correspondiente.</p> 
-		</div>
-	  </div>	
-    </div>
-
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="alert alert-warning" role="alert">
-					<p style="font-size:25px;">(*) El modelo consiste en una red neuronal recurrente el cual busca aproximarse a los valores reales mediante una curva. La mejor aproximación de un modelo puede estar en función de la capacidad y tiempo de ejecución con el que se cuente. </p>
-				</div>
-			</div>
-		</div>
-
 
 		<hr>
 

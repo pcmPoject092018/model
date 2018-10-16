@@ -31,9 +31,15 @@ def RSME(lista1,lista2):
     return math.sqrt(rsme)  
 		
 @app.route("/")  
-def main():
-    return render_template('main.html')
+def home():
+    return render_template('home.html')
 
+@app.route("/periodos",methods=['POST','GET'])  
+def periodos():
+    nombreEmisora=request.form.get('emisora',type=str)
+    emisoraHTML="periodos"+nombreEmisora+".html" 
+    return render_template(emisoraHTML)	
+	
 @app.route("/pronosticoAMXL",methods=['POST','GET']) 
 def pronosticoAMXL():  
     number = request.form.get('ejemplo',type=int)
@@ -66,7 +72,7 @@ def pronosticoAMXL():
     return render_template('pronosticoAMXL.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],error_precios=error_precios)
  
    
-if __name__ == "__main__":
+if __name__ == "__home__":
     #app.run(debug=True,port=5000)
 	app.run(debug=True)
 print('You can check the website now!')
