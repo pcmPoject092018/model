@@ -43,14 +43,14 @@ def periodos():
 @app.route("/pronosticoAMXL",methods=['POST','GET']) 
 def pronosticoAMXL():  
     number = request.form.get('ejemplo',type=int)
-    dfs=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/predicciones/*.csv'))]	
+    dfs=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/predicciones/americamovil/*.csv'))]	
     prediccion=dfs[number]['prediccion']    
     fecha=dfs[number]['fecha'] 	      	       
     fechaInicio=fecha[0]  
     fechaFin=fecha[6]
-    dataframes=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/dataframes/*.csv'))]
-    dataframesprevious=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/dataframesprevious/*.csv'))]	
-    prices=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/precios/*.csv'))]  
+    dataframes=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/dataframes/americamovil/*.csv'))]
+    dataframesprevious=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/dataframesprevious/americamovil/*.csv'))]	
+    prices=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/precios/americamovil/*.csv'))]  
     fulldataframes=[pd.concat([dataframesprevious[i],dataframes[i]]).reset_index(drop=True) for i in range(len(dataframes))]  	
     price=prices[number]	
     fulldataframe=fulldataframes[number]	
