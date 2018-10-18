@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="static/bootstrap/css/style.css">
+	<link rel="stylesheet" type="text/css" href="static/font-awesome/css/font-awesome.css">
+	<meta charset="utf-8">
+</head>
+
+<body>
+
+	<div class="container-fluid">
+
+		<div class="row">		
+			<div class="col-md-12">
+				<img src="static/img/logo.svg" width="700px;" class="img-responsive logo">
+			</div>						
+		</div>				
+	</div>
+
+
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="jumbotron" style="background: #727175; color: #fff;">
+		<div class="container-fluid">
+			<h2>NAFTRAC</h2>
+		</div>
+	</div>
+	<hr>
+
+		<div class="row">		
+			<div class="col-md-4">
+			</div>
+			<div class="col-lg-4">
+				<h2>Seleccionar pronóstico</h2>	
+				<!--<form class="form-signin" action = "http://127.0.0.1:5000/line_chart" method = "POST">-->
+                <form class="form-signin" action = "/pronosticoNAFTRAC" method = "POST">				
+					<div class="form-group">
+						<label for="ejemplo" class="sr-only">Pronósticos anteriores</label>
+						<select class="form-control" name="ejemplo" id="ejemplo" required>
+						<option value="0" label="17-10-2018">17-10-2018</option>
+						    <option value="14" label="16-10-2018">16-10-2018</option>
+						    <option value="13" label="15-10-2018">15-10-2018</option>
+						    <option value="12" label="11-10-2018">11-10-2018</option>
+							<option value="11" label="08-10-2018">08-10-2018</option>
+						    <option value="10" label="04-10-2018">04-10-2018</option>
+						    <option value="9" label="01-10-2018">01-10-2018</option>
+						    <option value="8" label="24-09-2018">24-09-2018</option>
+						    <option value="7" label="17-09-2018">17-09-2018</option>
+							<option value="6" label="10-09-2018">10-09-2018</option>
+							<option value="5" label="03-09-2018">03-09-2018</option>
+							<option value="4" label="27-08-2018">27-08-2018</option>
+							<option value="3" label="20-08-2018">20-08-2018</option>
+							<option value="2" label="13-08-2018">13-08-2018</option>
+							<option value="1" label="06-08-2018">06-08-2018</option>
+						</select> 
+					</div>					
+					<button type="submit" class="btn btn-default btn-lg"><i class="fa fa-line-chart" aria-hidden="true"></i> Consultar</button>
+				</form>
+			</div>
+			<div class="col-md-4">
+			</div>
+		</div>	
+
+		<hr>
+
+		<hr>
+
+		<!-- Site footer -->
+		<footer class="footer">
+			<p>&copy; 2018 PCM.</p>
+		</footer>
+	</div>
+
+	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+
+</body>	
+</html>
