@@ -12,7 +12,7 @@ import datetime
 
 import glob
 		   
-app = Flask(__name__)   
+app = Flask(__name__)    
 
 def predicted_prices(predicted_rates,previous_real_prices):
     predicted_prices=[]
