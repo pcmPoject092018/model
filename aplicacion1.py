@@ -72,7 +72,7 @@ def pronosticoAMXL():
     return render_template('pronosticoAMXL.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],error_precios=error_precios)
 
 @app.route("/pronosticoNAFTRAC",methods=['POST','GET']) 
-def pronosticoNAFTRAC():  
+def pronosticoNAFTRAC():   
     number = request.form.get('ejemplo',type=int)
     dfs=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/predicciones/naftrac/*.csv'))]	
     prediccion=dfs[number]['prediccion']    
