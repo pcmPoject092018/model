@@ -38,7 +38,7 @@
                 <form class="form-signin" action = "/pronosticoNAFTRAC" method = "POST">				
 					<div class="form-group">
 						<label for="ejemplo" class="sr-only">Pronósticos anteriores</label>
-						<select class="form-control" name="ejemplo" id="ejemplo" required>
+						<select onmousedown="if(this.options.length>5){this.size=5;}"  onchange='this.size=0;' onblur="this.size=0;" class="form-control" name="ejemplo" id="ejemplo" required>
 						<option value="0" label="18-10-2018" selected>18-10-2018</option>
 						    <option value="12" label="16-10-2018">16-10-2018</option>
 						    <option value="11" label="12-10-2018">12-10-2018</option>
