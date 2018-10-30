@@ -112,7 +112,7 @@ def pronosticoLALA():
     fechaFin=fecha[6]
     dataframes=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/dataframes/lala/*.csv'))]
     dataframesprevious=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/dataframesprevious/lala/*.csv'))]	
-    prices=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/precios/naftrac/*.csv'))]  
+    prices=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/precios/lala/*.csv'))]  
     fulldataframes=[pd.concat([dataframesprevious[i],dataframes[i]]).reset_index(drop=True) for i in range(len(dataframes))]  	
     price=prices[number]	
     fulldataframe=fulldataframes[number]	
