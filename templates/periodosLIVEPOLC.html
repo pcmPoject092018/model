@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="static/bootstrap/css/style.css">
+	<link rel="stylesheet" type="text/css" href="static/font-awesome/css/font-awesome.css">
+	<meta charset="utf-8">
+</head>
+
+<body>
+
+	<div class="container-fluid">
+
+		<div class="row">		
+			<div class="col-md-12">
+				<img src="static/img/logo.svg" width="700px;" class="img-responsive logo">
+			</div>						
+		</div>				
+	</div>
+
+
+
+	<!-- Main jumbotron for a primary marketing message or call to action (hola)-->
+	<div class="jumbotron" style="background: #727175; color: #fff;">
+		<div class="container-fluid">
+			<h2>LA COMER</h2>
+		</div>
+	</div>
+	<hr>
+
+		<div class="row">		
+			<div class="col-md-4">
+			</div>
+			<div class="col-lg-4">
+				<h2>Seleccionar pronóstico</h2>	
+				<!--<form class="form-signin" action = "http://127.0.0.1:5000/line_chart" method = "POST">-->
+                <form class="form-signin" action = "/pronosticoLIVEPOLC" method = "POST">				
+					<div class="form-group">
+						<label for="ejemplo" class="sr-only">Pronósticos anteriores</label>
+						<select onmousedown="if(this.options.length>5){this.size=5;}"  onchange='this.size=0;' onblur="this.size=0;" class="form-control" name="ejemplo" id="ejemplo" required>
+                        <option value="0" label="01-11-2018">01-11-2018</option> 						
+							<option value="8" label="15-10-2018">15-10-2018</option>
+						    <option value="7" label="11-10-2018">11-10-2018</option>
+							<option value="6" label="09-10-2018">09-10-2018</option>
+							<option value="5" label="05-10-2018">05-10-2018</option>
+							<option value="4" label="03-10-2018">03-10-2018</option>
+							<option value="3" label="01-10-2018">01-10-2018</option>
+							<option value="2" label="27-09-2018">27-09-2018</option>
+							<option value="1" label="25-09-2018">25-09-2018</option>
+						</select> 
+					</div>					
+					<button type="submit" class="btn btn-default btn-lg"><i class="fa fa-line-chart" aria-hidden="true"></i> Consultar</button>
+				</form>
+			</div>
+			<div class="col-md-4">
+			</div>
+		</div>	
+
+		<hr>
+
+		<hr>
+
+		<!-- Site footer -->
+		<footer class="footer">
+			<p>&copy; 2018 PCM.</p>
+		</footer>
+	</div>
+
+	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+
+</body>	
+</html>
