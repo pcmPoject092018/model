@@ -139,14 +139,14 @@ def pronosticoLALA():
 @app.route("/pronosticoLACOMUBC",methods=['POST','GET']) 
 def pronosticoLACOMUBC():   
     number = request.form.get('ejemplo',type=int)
-    dfs=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/predicciones/lacomubc/*.csv'))]	
+    dfs=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/predicciones/lacomer/*.csv'))]	
     prediccion=dfs[number]['prediccion']    
     fecha=dfs[number]['fecha'] 	      	       
     fechaInicio=fecha[0]  
     fechaFin=fecha[6]
-    dataframes=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/dataframes/lacomubc/*.csv'))]
-    dataframesprevious=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/dataframesprevious/lacomubc/*.csv'))]	
-    prices=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/precios/lacomubc/*.csv'))]  
+    dataframes=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/dataframes/lacomer/*.csv'))]
+    dataframesprevious=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/dataframesprevious/lacomer/*.csv'))]	
+    prices=[pd.read_csv(file,header=0) for file in sorted(glob.glob('model/precios/lacomer/*.csv'))]  
     fulldataframes=[pd.concat([dataframesprevious[i],dataframes[i]]).reset_index(drop=True) for i in range(len(dataframes))]  	
     price=prices[number]	
     fulldataframe=fulldataframes[number]	
