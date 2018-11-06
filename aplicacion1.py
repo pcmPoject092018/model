@@ -165,7 +165,7 @@ def pronosticoLACOMUBC():
     x=x[['fecha','precios','pronóstico precios','tasa','pronóstico tasa']]		
     x=x.reset_index(drop=True)		
     error_precios=RSME(precios[0:7],precios_prediccion[0:7])	
-    return render_template('pronosticoLALA.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],error_precios=error_precios)
+    return render_template('pronosticoLACOMUBC.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],error_precios=error_precios)
  
 @app.route("/pronosticoLIVEPOLC",methods=['POST','GET']) 
 def pronosticoLIVEPOLC():   
