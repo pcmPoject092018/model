@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Pronóstico</title>
+  <!-- import plugin script -->
+  <script src='static/Chart.min.js'></script>
+  <script src='static/chartjs-plugin-annotation.min.js'></script>
+  <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="static/bootstrap/css/style.css">
+  <link rel="stylesheet" type="text/css" href="static/font-awesome/css/font-awesome.css">
+  <meta charset="utf-8">  
+</head>
+<body> 
+
+  <div class="container-fluid">
+    <div class="row">   
+      <div class="col-md-12">	  
+        <img src="static/img/logo.svg" width="500px;" class="img-responsive logo">	 
+      </div>            
+    </div>        
+  </div>
+
+  <div class="jumbotron" style="background: #727175; color: #fff;">
+    <div class="container-fluid">
+     <h2>Pronóstico de tasa de cambio a 7 días de precio de cierre de ALSEA</h2>     
+   </div>
+ </div>
+
+
+
+ <div class="container">
+  <div class="row">   
+    <div class="col-md-12">     
+	  <h2>Pronóstico de precio</h2>	
+	   <!--  <h3>El error es: {{error_precios}}</h3> -->	
+      <canvas id="myChartAnexo" width="1000px" height="450" style="border:1px solid #d3d3d3;"></canvas>	
+    </div>      
+    <div class="col-md-12">  
+      <h2>Pronóstico de tasa de cambio</h2>	
+      <canvas id="myChart" width="1000px" height="450" style="border:1px solid #d3d3d3;"></canvas>      
+    </div>                  
+  </div>        
+</div>
+
+
+
+
+<script>
+
+      // Global parameters:
+      // do not resize the chart canvas when its container does (keep at 600x400px)
+      Chart.defaults.global.responsive = false;
+
+      // define the chart data
+      var chartData = {
+        labels : [{% for item in labels %}
+        "{{item}}",
+        {% endfor %}],
+        datasets : [{
+          label: 'pronóstico de tasa de cambio',
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: "rgb(153,0,0,0.4)",
+          borderColor: "rgba(153,0,0,0.4)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgb(153,0,0,0.4)",
+          pointBackgroundColor: "#000",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgb(153,0,0,0.4)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data : [{% for item in values_prediccion %}
+          "{{item}}",
+          {% endfor %}],
+          spanGaps: false
+        },
+        {
+          label: 'valor real de tasa de cambio',
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: "rgba(75,192,192,0.4)",
+          borderColor: "rgba(75,192,192,1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(75,192,192,1)",
+          pointBackgroundColor: "#000",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data : [{% for item in values_real %}
+          "{{item}}",
+          {% endfor %}],
+          spanGaps: false
+        }]
+      };
+      var chartDataAnexo = {
+        labels : [{% for item in labels %}
+        "{{item}}",
+        {% endfor %}],
+        datasets : [{
+          label: 'precio real',
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: "rgba(75,192,192,0.4)",
+          borderColor: "rgba(75,192,192,1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(75,192,192,1)",
+          pointBackgroundColor: "#000",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data : [{% for item in values_precios %}
+          "{{item}}",
+          {% endfor %}],
+          spanGaps: false
+        },{
+          label: 'precio predicción',
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: "rgb(153,0,0,0.4)",
+          borderColor: "rgb(153,0,0,0.4)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgb(153,0,0,0.4)",
+          pointBackgroundColor: "#000",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgb(153,0,0,0.4)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data : [{% for item in values_precios_prediccion %}
+          "{{item}}",
+          {% endfor %}],
+          spanGaps: false
+        }]
+      };
+      // get chart canvas
+      var holder = document.getElementById("myChart");
+      var ctx = holder.getContext("2d");
+
+      var holderAnexo=document.getElementById("myChartAnexo");
+      var ctxAnexo=holderAnexo.getContext("2d");
+
+      // create the chart using the chart canvas
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: {
+          annotation: {
+            annotations: [
+            {
+              type: 'box',
+              drawTime: 'beforeDatasetsDraw',
+              xScaleID: 'x-axis-0',
+              xMin: '{{fechaInicio}}',
+              xMax: '{{fechaFin}}',
+              backgroundColor: 'rgba(194,191,186)',
+            }
+            ]
+          },
+          tooltips: {
+            enabled: true,
+            mode: 'single',
+            callbacks: {
+              label: function(tooltipItems, data) {
+               return tooltipItems.yLabel + ' de tasa de cambio';
+             }
+           }
+         }
+       }
+
+     });
+
+      var myChartAnexo = new Chart(ctxAnexo, {
+        type: 'line',
+        data: chartDataAnexo,
+        options: {
+          annotation: {
+            annotations: [
+            {
+              type: 'box',
+              drawTime: 'beforeDatasetsDraw',
+              xScaleID: 'x-axis-0',
+              xMin: '{{fechaInicio}}',
+              xMax: '{{fechaFin}}',
+              backgroundColor: 'rgba(194,191,186)',
+            }
+            ]
+          },
+          tooltips: {
+            enabled: true,
+            mode: 'single',
+            callbacks: {
+              label: function(tooltipItems, data) {
+               return tooltipItems.yLabel + ' precio de cierre';
+             }
+           }
+         }
+       }
+
+     });
+
+	        // get the text element below the chart
+          var pointSelected = document.getElementById("pointSelected");
+      // create a callback function for updating the selected index on the chart
+      holder.onclick = function(evt){
+        var activePoint = myChart.getElementAtEvent(evt);
+        console.log(activePoint);
+        console.log('x:' + activePoint[0]._view.x);
+        console.log('maxWidth: ' + activePoint[0]._xScale.maxWidth);
+        console.log('y: ' + activePoint[0]._view.y);
+        console.log('index: ' + activePoint[0]._index);
+        pointSelected.innerHTML = 'Point selected... index: ' + activePoint[0]._index;
+      };
+    </script>   
+
+    <hr>
+
+
+    <div class="container-fluid">
+	<h3>Tabla de pronósticos y valores reales</h3>  
+      <div class="row">   
+        <div class="col-md-12">
+          {% for table in tables %}
+          {{ table|safe }}
+          {% endfor %}
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- Site footer -->
+      <footer class="footer">
+        <p>&copy; 2018 PCM.</p>
+      </footer>
+
+    </div>
+
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+<script>
+
+("table").addClass("table");
+</script>
+
+  </body>
+
+  </html>
