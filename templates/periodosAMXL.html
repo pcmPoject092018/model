@@ -33,7 +33,7 @@
     $(document).ready(function () {
             
             var url = "static/periodosAMXL.json";
-
+            $.ajaxSetup({ cache: false });
             $.getJSON(url, function (data) {
                 $.each(data, function (index, value) {
                     // APPEND OR INSERT DATA TO SELECT ELEMENT.
