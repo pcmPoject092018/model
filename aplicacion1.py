@@ -469,11 +469,11 @@ def fullTrain(fechaActual,nBack,nFeaturesList,nAhead,lengthHistoricoList,emisora
 		#
 	#
 @app.route("/homeModeloApoyo")  
-def home():
+def homeModeloApoyo():
     return render_template('modeloApoyo.html')
 
 @app.route("/modeloApoyo",methods=['POST','GET'])  
-def periodos():
+def modeloApoyo():
     emisora=request.form.get('emisora',type=str)	
     fechaActual=request.form.get('fechaActual',type=str)
     nAhead=request.form.get('nAhead',type=int)
