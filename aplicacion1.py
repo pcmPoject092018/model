@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import render_template,request
 from datetime import time
-   
+
+from sklearn.linear_model import LogisticRegression   
 import pandas as pd  
 import numpy as np     
  
