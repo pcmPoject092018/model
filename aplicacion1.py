@@ -353,7 +353,146 @@ def pronosticoALPEKA():
     error_precios=RSME(precios[0:7],precios_prediccion[0:7])	
     return render_template('pronosticoALPEKA.html', values_prediccion=prediccion,values_real=real,values_precios=precios, values_precios_prediccion=precios_prediccion,labels=fecha,fechaInicio=fechaInicio,fechaFin=fechaFin,tables=[x.to_html(classes='table')],error_precios=error_precios)
  
-    
+##################################################################################################################################
+
+def buildFeatures(precios,fechas,nFeatures):
+    moves={}
+    for i in range(nFeatures,len(precios)):
+        move=[]
+        for j in reversed(range(1,nFeatures+1)):
+            if precios[i-j]<=precios[i]:
+                move.append(0)
+            else:
+                move.append(1)
+        moves[fechas[i]]=move
+    return moves  
+	
+def buildLabel(precios,fechas,nAhead,nFeatures):
+    moveAhead={}
+    for i in range(nFeatures,len(precios)-nAhead):
+        if precios[i]<precios[i+nAhead]:
+            moveAhead[fechas[i]]=1
+        else:
+            moveAhead[fechas[i]]=0
+    return moveAhead 	
+
+def data(lengthHistorico,emisora):
+    pathData="model/data/"+emisora+".csv"
+    amov=pd.read_csv(pathData,header=6,sep=",")[::-1].reset_index(drop=True) 
+    initial=amov.shape[0]-lengthHistorico
+    amov=amov.iloc[initial:,:].reset_index()
+    precios=amov['PRECIO']
+    fechas=amov['Date']
+    return precios, fechas	
+	
+def Score(nFeatures,nAhead,lengthHistorico,emisora,trainSize,C,fit_intercept):
+    precios, fechas=data(lengthHistorico,emisora)
+    features=buildFeatures(precios,fechas,nFeatures)
+    label=buildLabel(precios,fechas,nAhead,nFeatures)
+    labels=list(label.values())
+    observations=list(features.values())[0:len(labels)]
+    dates=list(label.keys())
+    df=pd.concat([pd.DataFrame(observations),pd.DataFrame(labels),pd.DataFrame(dates)],axis=1)
+    df.columns=["day"+str(i) for i in range(1,nFeatures+1)]+["target","fecha"]
+    trainLength=round(df.shape[0]*trainSize)
+    train=df.iloc[0:trainLength,0:nFeatures+1]
+    test=df.iloc[trainLength:,0:nFeatures+1]
+    lr=LogisticRegression(C=C,fit_intercept=fit_intercept)
+    score=lr.fit(train.iloc[:,0:nFeatures],train["target"]).score(test.iloc[:,0:nFeatures],test["target"])
+    return score
+
+def gridSearch(nFeaturesList,nAhead,lengthHistoricoList,emisora,trainSize,CList,fit_interceptList):
+    total_modelos=len(nFeaturesList)*len(lengthHistoricoList)*len(CList)*len(fit_interceptList)
+    scoreUsed=[]
+    nFeaturesUsed=[]
+    lengthHistoricoUsed=[]
+    CUsed=[]
+    fit_interceptUsed=[]
+    count=0
+    for a in nFeaturesList:
+        for b in lengthHistoricoList:
+            for c in CList:
+                for d in fit_interceptList:
+                        print("nFeatures es " + str(a) + ", lengthHistorico es " + str(b) + ", C es " + str(c) + ", fit_intercept es " + str(d))
+                        try:
+                            score=Score(nFeatures=a,nAhead=nAhead,
+                                    lengthHistorico=b,emisora=emisora,trainSize=trainSize,C=c,fit_intercept=d)
+                            scoreUsed.append(score)
+                            print("el nFeatures usado es:")  
+                            print(a)
+                            nFeaturesUsed.append(a)
+                            print("el lengthHistorico usado es:")
+                            print(b)
+                            lengthHistoricoUsed.append(b)
+                            print("el C usado es:")
+                            print(c)
+                            CUsed.append(c)
+                            print("el fit_intercept usado es:")
+                            print(d)
+                            fit_interceptUsed.append(d)
+                        except ValueError:
+                            pass
+                        count=count+1
+                        print("modelo "+ str(count) + " terminado de " +str(total_modelos) + " en total")
+                    
+    d={'score':scoreUsed,'nFeatures':nFeaturesUsed,'lengthHistorico':lengthHistoricoUsed,'C':CUsed,'fit_intercept':fit_interceptUsed}
+    parametros=pd.DataFrame(d)
+    parameters=parametros.sort_values(['score']).reset_index()
+    return parameters
+
+def fullTrain(fechaActual,nBack,nFeaturesList,nAhead,lengthHistoricoList,emisora,trainSize,CList,fit_interceptList):
+    pathData="model/data/"+emisora+".csv"
+    amov=pd.read_csv(pathData,header=6,sep=",")[::-1].reset_index(drop=True) 
+    precios=amov['PRECIO']
+    fechas=amov['Date']
+    parameters=gridSearch(nFeaturesList=nFeaturesList,nAhead=nAhead,lengthHistoricoList=lengthHistoricoList,emisora=emisora,trainSize=trainSize,CList=CList,fit_interceptList=fit_interceptList)
+    bestParameters=parameters.values[-1].tolist()
+    print(bestParameters[1])
+    nFeatures=bestParameters[2] #best nFeatures
+    lengthHistorico=bestParameters[3] #best lengthHistorico
+    C=bestParameters[4] #best C
+    fit_intercept=bestParameters[5] #best fit_intercept
+    features=buildFeatures(precios,fechas,nFeatures)
+    label=buildLabel(precios,fechas,nAhead,nFeatures)
+    labels=list(label.values())
+    observations=list(features.values())[0:len(labels)]
+    dates=list(label.keys())
+    df=pd.concat([pd.DataFrame(observations),pd.DataFrame(labels),pd.DataFrame(dates)],axis=1)
+    df.columns=["day"+str(i) for i in range(1,nFeatures+1)]+["target","fecha"]
+    lr=LogisticRegression(C=C,fit_intercept=fit_intercept)
+    lr.fit(df.iloc[0:df.shape[0]-nBack,0:nFeatures],df.iloc[0:df.shape[0]-nBack,nFeatures])
+    fullData=buildFeatures(precios,fechas,nFeatures)
+    prediccion=lr.predict(np.array(fullData[fechaActual]).reshape(1,-1))
+    probabilidad=lr.predict_proba(np.array(fullData[fechaActual]).reshape(1,-1))
+    return prediccion,probabilidad	
+
+		#
+	#
+@app.route("/homeModeloApoyo")  
+def home():
+    return render_template('modeloApoyo.html')
+
+@app.route("/modeloApoyo",methods=['POST','GET'])  
+def periodos():
+    emisora=request.form.get('emisora',type=str)	
+    fechaActual=request.form.get('fechaActual',type=str)
+    nAhead=request.form.get('nAhead',type=int)
+    nBack=request.form.get('nBack',type=int)
+    trainSize=request.form.get('trainSize',type=float)
+    nFeaturesList=[7,9,11,13,15]
+    lengthHistoricoList=[30,45,60,75,90,105,120,135,150]
+    CList=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
+    fit_interceptList=[True,False]
+    resultado=fullTrain(fechaActual=fechaActual,nBack=nBack,nFeaturesList=nFeaturesList,nAhead=nAhead,lengthHistoricoList=lengthHistoricoList,emisora=emisora,trainSize=trainSize,CList=CList,fit_interceptList=fit_interceptList)
+    prediccion=resultado[0]
+    probabilidad=resultado[1]
+    probabilidad=probabilidad.tolist()	
+    probabilidadBajada=probabilidad[0][0]
+    probabilidadSubida=probabilidad[0][1]		
+    return render_template("resultado.html",nAhead=nAhead,fechaActual=fechaActual,probabilidadBajada=probabilidadBajada,probabilidadSubida=probabilidadSubida)	
+     
+
+ 
    
 if __name__ == "__home__":
     #app.run(debug=True,port=5000)
